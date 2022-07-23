@@ -78,10 +78,10 @@ class ProductController extends Controller
         $comments = DB::table('comments')
         ->join('users', 'comments.user_id', '=', 'users.id')->where('comments.product_id', '=', $product)
         // ->join('products', 'comments.product_id', '=', 'products.id'), 'products.nameProduct'
-        ->select('comments.*', 'users.name')->get();
-        dd($comments);
+        ->select('comments.*', 'users.name','users.avatar')->get();
+        // dd($comments);
         $cate = CategoryProduct::all();
         $dataProduct = Product::find($product);
-        return view('client.product-detail', compact('dataProduct', 'cate'));
+        return view('client.product-detail', compact('dataProduct', 'cate', 'comments'));
     }
 }

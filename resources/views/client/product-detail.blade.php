@@ -35,9 +35,9 @@
                             <div class="down-content">
                                 <h3>
                                     <h4 style="font-size: 38px;">{{ $dataProduct->nameProduct }}</h4>
-                                    @foreach($cate as $item)
-                                        @if($item->id === $dataProduct->category_id)
-                                            <p>Loại sản phẩm: {{$item->name}}</p>
+                                    @foreach ($cate as $item)
+                                        @if ($item->id === $dataProduct->category_id)
+                                            <p>Loại sản phẩm: {{ $item->name }}</p>
                                         @endif
                                     @endforeach
                                 </h3> <br>
@@ -58,26 +58,28 @@
                 <div class="col-md-12">
                     <div class="section-heading">
                         <h2>Bình luận</h2>
-                        {{ Auth::user()->id }}
+                        {{-- {{ Auth::user()->id }} --}}
                     </div>
-                    <div class="product-item p-4">
-                        <div class="d-flex">
-                            <div class="avatar mr-2">
-                                <img src="https://tse1.mm.bing.net/th?id=OIP.V9tfJt6DpW56jMG6cZj2-wHaFC&pid=Api&P=0"
-                                    style="width: 60px;" class="rounded-circle" alt="">
-                            </div>
-                            <div class="d-flex flex-column">
-                                <h5>Admin</h5>
-                                <p class="text-black-50">21/07/2022</p>
+                    @foreach ($comments as $item)
+                        <div class="product-item px-3 py-3 my-1">
+                            <div class="d-flex">
+                                <div class="avatar mr-2">
+                                    <img src="{{ $item->avatar }}" style="width: 60px;" class="rounded-circle"
+                                        alt="">
+                                </div>
+                                <div class="d-flex flex-column justify-content-center">
+                                    <h5>{{ $item->name }}</h5>
+                                    <p class="text-black-50">{{ $item->dateComment }}</p>
+                                </div>
+                                <div class="content ml-5 my-auto">
+                                    <p class="text-black-50 font-weight-bold">{{ $item->content }}</p>
+                                </div>
                             </div>
                         </div>
-                        <div class="content mt-1">
-                            <p class="text-black-50 font-weight-bold">Quá là ố dề</p>
-                        </div>
-                    </div>
+                    @endforeach
                     <form action="">
                         <div class="form-group d-flex">
-                            <input type="text" name="comment" class="form-control mr-2" placeholder="Viết bình luận">
+                            <input type="text" name="content" class="form-control mr-2" placeholder="Viết bình luận">
                             <button type="submit" class="btn btn-primary">Bình luận</button>
                         </div>
                     </form>
