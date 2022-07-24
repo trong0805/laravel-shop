@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Comment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class CommentController extends Controller
@@ -16,10 +17,21 @@ class CommentController extends Controller
         // \dd($comments);
         return view('admin.comments.list', compact('comments'));
     }
+    public function store(Request $request) {
+        $comment = new Comment();
+
+        $comment->user_id = Auth::user()->id;
+        $comment->product_id = $request->product_id;
+        $comment->content = $request->content;
+        $comment->dateComment = date("Y-m-d");
+        // dd(date("Y-m-d"));
+        $comment->save();
+        return redirect()->back();
+    // Auth::user()
+    }
     public function delete($comment) {
         $data = Comment::find($comment);
         $data->delete();
         return redirect()->route('admin.comments.list');
-        
     }
 }

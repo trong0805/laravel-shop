@@ -21,9 +21,11 @@
             <li class="nav-item">
               <a class="nav-link" href="{{ route('page.contacts.contact') }}">Contact Us</a>
             </li>
+            @if(Auth::user())
             <li class="nav-item">
-              <a class="nav-link" href="{{ route('page.carts') }}">Giỏ hàng <i class="fa fa-cart-arrow-down"></i></a>
+              <a class="nav-link" href="{{ route('page.carts.list') }}">Giỏ hàng <i class="fa fa-cart-arrow-down"></i></a>
             </li>
+            @endif
             <li class="nav-item">
               @if(Auth::user())
               <a class="nav-link hover">

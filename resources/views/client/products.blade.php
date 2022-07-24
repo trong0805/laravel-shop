@@ -37,7 +37,7 @@
                   @foreach($products as $item)
                   <div class="col-lg-4 col-md-4 all prd{{ $item->category_id }}">
                     <div class="product-item">
-                      <a href="{{ route('page.product-detail', $item->id) }}"><img src="{{ asset('assets/images/product_06.jpg') }}" alt=""></a>
+                      <a href="{{ route('page.product-detail', $item->id) }}"><img src="{{ asset($item->avatar) }}" alt=""></a>
                       <div class="down-content">
                         <a href="{{ route('page.product-detail', $item->id) }}" class="d-block"><h5 class="text-capitalize">{{ $item->nameProduct }}</h5></a>
                         <p class="m-0">Giá: {{ number_format($item->price) }} <sup>đ</sup></p>

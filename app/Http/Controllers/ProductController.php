@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ProductRequest;
 use App\Models\CategoryProduct;
+use App\Models\Comment;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -75,13 +76,24 @@ class ProductController extends Controller
         return view('client.products', compact('products', 'cate'));
     }
     public function showProductDetail($product) {
+        //lấy ra sản phẩm chi tiết
+        $dataProduct = Product::find($product);
+        //lấy ra tất cả comment của sản phẩm
         $comments = DB::table('comments')
         ->join('users', 'comments.user_id', '=', 'users.id')->where('comments.product_id', '=', $product)
         // ->join('products', 'comments.product_id', '=', 'products.id'), 'products.nameProduct'
-        ->select('comments.*', 'users.name','users.avatar')->get();
-        // dd($comments);
+        ->select('comments.*', 'users.name','users.avatar')->paginate(6);
+        //lấy ra các sản phẩm cùng loại
+        $productCate = DB::table('products')
+        ->join('category_products', 'products.category_id', '=', 'category_products.id')->where('products.category_id', '=', $dataProduct->category_id)
+        ->select('products.*', 'category_products.name')->get();
+        // dd($productCate);
         $cate = CategoryProduct::all();
-        $dataProduct = Product::find($product);
-        return view('client.product-detail', compact('dataProduct', 'cate', 'comments'));
+        return view('client.product-detail', compact('dataProduct', 'cate', 'comments', 'productCate'));
+    }
+    public function deleteComment($comment) {
+        $data = Comment::find($comment);
+        $data->delete();
+        return redirect()->route('page.product-detail', $comment->product_id);
     }
 }

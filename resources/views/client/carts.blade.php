@@ -28,7 +28,13 @@
 
           <!-- Shopping cart table -->
           <div class="table-responsive">
+            @if (session()->has('success'))
+              <div class="alert alert-success">
+                {{ session()->get('success') }}
+              </div>
+            @endif
             <table class="table">
+              <a href="{{ route('page.products') }}" class="float-right"><i class="fa fa-arrow-circle-right" aria-hidden="true"></i>Tiếp tục mua</a>
               <thead>
                 <tr>
                   <th scope="col" class="border-0 bg-light">
@@ -46,33 +52,42 @@
                 </tr>
               </thead>
               <tbody>
+                @foreach($carts as $item)
                 <tr>
                   <th scope="row" class="border-0">
                     <div class="p-2">
-                      <img src="https://bootstrapious.com/i/snippets/sn-cart/product-1.jpg" alt="" width="70" class="img-fluid rounded shadow-sm">
+                      <img src="{{ asset($item->avatar) }}" alt="" width="70" class="img-fluid rounded shadow-sm">
                       <div class="ml-3 d-inline-block align-middle">
-                        <h5 class="mb-0"> <a href="#" class="text-dark d-inline-block align-middle">Timex Unisex Originals</a></h5><span class="text-muted font-weight-normal font-italic d-block">Category: Watches</span>
+                        <h5 class="mb-0"> <a href="#" class="text-dark d-inline-block align-middle">{{ $item->nameProduct }}</a></h5>
+                        <span class="text-muted font-weight-normal font-italic d-block">Category: 
+                          @foreach($cate as $category)
+                            @if($item->category_id === $category->id)
+                              {{ $category->name }}
+                            @endif
+                          @endforeach
+                        </span>
                       </div>
                     </div>
                   </th>
-                  <td class="border-0 align-middle"><strong>$79.00</strong></td>
-                  <td class="border-0 align-middle"><strong>3</strong></td>
-                  <td class="border-0 align-middle"><a href="#" class="text-dark"><i class="fa fa-trash"></i></a></td>
-                </tr>
-                <tr>
-                  <th scope="row">
-                    <div class="p-2">
-                      <img src="https://bootstrapious.com/i/snippets/sn-cart/product-2.jpg" alt="" width="70" class="img-fluid rounded shadow-sm">
-                      <div class="ml-3 d-inline-block align-middle">
-                        <h5 class="mb-0"><a href="#" class="text-dark d-inline-block">Lumix camera lense</a></h5><span class="text-muted font-weight-normal font-italic">Category: Electronics</span>
-                      </div>
-                    </div>
-                  </th>
-                  <td class="align-middle"><strong>$79.00</strong></td>
-                  <td class="align-middle"><strong>3</strong></td>
-                  <td class="align-middle"><a href="#" class="text-dark"><i class="fa fa-trash"></i></a>
+                  <td class="border-0 align-middle"><strong>{{ number_format($item->price) }}</strong></td>
+                  {{-- <td class="border-0 align-middle"><strong>{{ $item->quantity }}</strong></td> --}}
+                  <td class="border-0 align-middle">
+                    <form action="{{ route('page.carts.update', $item->id) }}" method="post">
+                      @csrf
+                      <input style="width: 50px;" type="number" name="quantity" value="{{ $item->quantity }}">
+                      <button type="submit" class="btn btn-success"><i class="fas fa-check"></i></button>
+                    </form>
                   </td>
+                  <td class="border-0 align-middle"><a href="#" class="text-dark">
+                    <form action="{{ route('page.carts.delete', $item->id) }}" method="post">
+                      @csrf
+                      @method('DELETE')
+                      <a onclick="return confirm('Bạn có muốn xóa sản phẩm này trong giỏ hàng?')">
+                        <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i></a></button>
+                      </a>
+                    </form></td>
                 </tr>
+                @endforeach
               </tbody>
             </table>
           </div>

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryPostController;
 use App\Http\Controllers\CategoryProductController;
 use App\Http\Controllers\CommentController;
@@ -28,6 +29,10 @@ Route::prefix('page')->name('page.')->group(function () {
     Route::get('/products', [ProductController::class, 'showProduct'])->name('products');
     Route::get('/product-detail/{product}',  [ProductController::class, 'showProductDetail'])->name('product-detail');
 
+    Route::post('/store', [CommentController::class, 'store'])->name('store');
+    // Route::get('/edit/{comment}', [CommentController::class, 'edit'])->name('edit');
+    // Route::put('/update/{comment}', [CommentController::class, 'update'])->name('update');
+    Route::delete('/deleteComment/{comment}', [ProductController::class, 'deleteComment'])->name('deleteComment');
     //trang liên hệ
     Route::get('/about', function () {
         return view('client.about');
@@ -38,9 +43,13 @@ Route::prefix('page')->name('page.')->group(function () {
         Route::get('/', [ContactController::class, 'createContact'])->name('contact');
         Route::post('/store', [ContactController::class, 'storeContact'])->name('store');
     });
-    Route::get('carts', function () {
-        return view('client.carts');
-    })->name('carts');
+
+    Route::prefix('carts')->name('carts.')->group(function () {
+        Route::get('/', [CartController::class, 'index'])->name('list');
+        Route::post('/storeCart', [CartController::class, 'storeCart'])->name('storeCart');
+        Route::post('/update/{cart}', [CartController::class, 'update'])->name('update');
+        Route::delete('/delete/{cart}', [CartController::class, 'delete'])->name('delete');
+    });
 });
 // ============================PHẦN ADMIN=============================
 Route::prefix('admin')->middleware('CheckAdminLogin')->name('admin.')->group(function () {
@@ -93,9 +102,6 @@ Route::prefix('admin')->middleware('CheckAdminLogin')->name('admin.')->group(fun
     });
     Route::prefix('comments')->name('comments.')->group(function () {
         Route::get('/', [CommentController::class, 'index'])->name('list');
-        Route::post('/store', [CommentController::class, 'store'])->name('store');
-        Route::get('/edit/{comment}', [CommentController::class, 'edit'])->name('edit');
-        Route::put('/update/{comment}', [CommentController::class, 'update'])->name('update');
         Route::delete('/delete/{comment}', [CommentController::class, 'delete'])->name('delete');
     });
 });
