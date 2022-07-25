@@ -72,7 +72,11 @@ class ProductController extends Controller
     }
     public function showProduct() {
         $cate = CategoryProduct::all();
-        $products = DB::table('category_products')->join('products', 'category_products.id', '=', 'products.category_id')->Paginate(9);
+        // $products = DB::table('products')->join('category_products', 'products.category_id', '=', 'category_products.id')
+        // ->select('products.*', 'category_products.name')->Paginate(9);
+        $products = Product::select('products')->join('category_products', 'products.category_id', '=', 'category_products.id')->select('products.*','category_products.*')->search()->Paginate(5);
+
+        // \dd($products);
         return view('client.products', compact('products', 'cate'));
     }
     public function showProductDetail($product) {

@@ -17,6 +17,7 @@
                 <th>Tên</th>
                 <th>Ảnh</th>
                 <th>Giá</th>
+                <th>Kích cỡ</th>
                 <th>Mô tả</th>
                 <th>Danh mục</th>
                 <th>Chức năng</th>
@@ -29,6 +30,15 @@
                     <td>{{ $item->nameProduct }}</td>
                     <td><img src="{{ asset($item->avatar) }}" width="100px" alt=""></td>
                     <td>{{ $item->price }}</td>
+                    <td>
+                        @if ($item->size === 1)
+                            Cỡ nhỏ
+                        @elseif ($item->size === 2)
+                            Cỡ vừa
+                        @else
+                            Cỡ lớn
+                        @endif
+                    </td>
                     <td>{{ $item->description }}</td>
                     <td>{{ $item->name }}</td>
                     <td style="display: flex;">

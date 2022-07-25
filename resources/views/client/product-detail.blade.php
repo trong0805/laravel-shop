@@ -26,30 +26,38 @@
                     </div>
                 </div>
                 <div class="col-md-12 d-flex">
-                    <div class="col-lg-4 col-md-4">
-                        <img width="100%" src="{{ asset($dataProduct->avatar) }}"
-                            alt="">
+                    <div class="col-lg-6 col-md-6">
+                        <img width="100%" class="border" src="{{ asset($dataProduct->avatar) }}" alt="">
                     </div>
-                    <div class="col-lg-8 col-md-8">
+                    <div class="col-lg-6 col-md-6">
                         <div class="product-item">
                             <div class="down-content">
-                                <h3>
+                                {{-- <h3> --}}
                                     <h4 style="font-size: 38px;">{{ $dataProduct->nameProduct }}</h4>
                                     @foreach ($cate as $item)
                                         @if ($item->id === $dataProduct->category_id)
-                                            <p>Loại sản phẩm: {{ $item->name }}</p>
+                                            <p class="mb-0">Loại sản phẩm: {{ $item->name }}</p>
                                         @endif
                                     @endforeach
-                                </h3> <br>
-                                <p style="font-size: 26px;"> Giá: {{ number_format($dataProduct->price) }}<sup>đ</sup></p>
+                                {{-- </h3>  --}}
+                                <p> Kích cỡ : @if ($item->size === 1)
+                                        Cỡ nhỏ
+                                    @elseif ($item->size === 2)
+                                        Cỡ vừa
+                                    @else
+                                        Cỡ lớn
+                                    @endif
+                                </p>
+                                <p style="font-size: 26px; color: rgb(255, 85, 85);"> Giá: {{ number_format($dataProduct->price) }}<sup>đ</sup></p>
                                 <p> {{ $dataProduct->description }}</p>
                                 {{-- thêm vào giỏ --}}
                                 <form action="{{ route('page.carts.storeCart') }}" method="post">
                                     @csrf
                                     <input type="hidden" name="productId" value="{{ $dataProduct->id }}">
-                                    <input type="hidden" name="userId" value="{{ Auth::user()->id }}">
+                                    <input type="hidden" name="userId" value="{{ Auth::user() ? Auth::user()->id : '' }}">
                                     <input type="hidden" name="price" value="{{ $dataProduct->price }}">
-                                    <input name="quantity" class="input-qty" max="10" min="1" type="number" value="1">
+                                    <input name="quantity" class="input-qty" max="10" min="1" type="number"
+                                        value="1">
                                     <button type="submit" class="btn btn-danger">Thêm vào giỏ hàng</button>
                                 </form>
                                 <ul class="stars">
@@ -84,25 +92,31 @@
                                     <p class="text-black-50 font-weight-bold">{{ $item->content }}</p>
                                 </div>
                             </div>
-                            @if($item->user_id === Auth::user()->id)
-                            <form action="{{ route('page.deleteComment', $item->id) }}" method="post">
-                                @method('DELETE')
-                                @csrf
-                                <div class="float-right align-content-center">
-                                    <button type="submit" class="btn btn-danger">Xóa comment</button>
-                                </div></form>
+                            @if (Auth::user() && $item->user_id === Auth::user()->id)
+                                <form action="{{ route('page.deleteComment', $item->id) }}" method="post">
+                                    @method('DELETE')
+                                    @csrf
+                                    <div class="float-right align-content-center">
+                                        <button type="submit" class="btn btn-danger">Xóa comment</button>
+                                    </div>
+                                </form>
                             @endif
                         </div>
                     @endforeach
                     <div class="my-2">{{ $comments->links() }}</div>
-                    <form action="{{ route('page.store') }}" method="POST">
-                        @csrf
-                        <div class="form-group d-flex">
-                            <input type="hidden" value="{{ $dataProduct->id }}" name="product_id" class="form-control mr-2" placeholder="id sản phẩm">
-                            <input type="text" name="content" class="form-control mr-2" placeholder="Viết bình luận">
-                            <button type="submit" class="btn btn-primary">Bình luận</button>
-                        </div>
-                    </form>
+                    @if (Auth::user())
+                        <form action="{{ route('page.store') }}" method="POST">
+                            @csrf
+                            <div class="form-group d-flex">
+                                <input type="hidden" value="{{ $dataProduct->id }}" name="product_id"
+                                    class="form-control mr-2" placeholder="id sản phẩm">
+                                <input type="text" name="content" class="form-control mr-2" placeholder="Viết bình luận">
+                                <button type="submit" class="btn btn-primary">Bình luận</button>
+                            </div>
+                        </form>
+                    @else
+                        <p class="my-2 text-center">Vui lòng đăng nhập để sử dụng tính năng!</p>
+                    @endif
                 </div>
                 {{-- //sản phẩm liên quan --}}
                 <div class="col-md-12">
@@ -118,7 +132,15 @@
                                                 <h5 class="text-capitalize">{{ $item->nameProduct }}</h5>
                                             </a>
                                             <p class="m-0">Giá: {{ number_format($item->price) }} <sup>đ</sup></p>
-                                            <p>Loại sản phẩm : {{ $item->name }}</p>
+                                            <p class="my-0">Loại sản phẩm : {{ $item->name }}</p>
+                                            <p class="my-0">Kích cỡ : @if ($item->size === 1)
+                                                Cỡ nhỏ
+                                            @elseif ($item->size === 2)
+                                                Cỡ vừa
+                                            @else
+                                                Cỡ lớn
+                                            @endif
+                                        </p>
                                             <ul class="stars">
                                                 <li><i class="fa fa-star"></i></li>
                                                 <li><i class="fa fa-star"></i></li>

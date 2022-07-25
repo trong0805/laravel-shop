@@ -10,5 +10,6 @@ class CategoryPost extends Model
     use HasFactory;
     protected $fillable = [
         'name',
+        'statusPost',
     ];
 }

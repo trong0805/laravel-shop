@@ -24,7 +24,7 @@
                     <td>{{ $item->email }}</td>
                     <td>{{ $item->title }}</td>
                     <td>{{ $item->content }}</td>
-                    <td>{{ $item->action === 0 ? 'Chưa phản hồi' : 'Đã phản hồi' }}</td>
+                    <td>{{ $item->action == 0 ? 'Chưa phản hồi' : 'Đã phản hồi' }}</td>
                     <td>
                         <a onclick="return confirm('Bạn có chắc chắn muốn xóa')">
                             <form action="{{ route('admin.contacts.delete', $item->id) }}" method="post">

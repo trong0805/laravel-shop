@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\SizeController;
 use App\Models\Product;
 
 Route::prefix('auth')->name('auth.')->group(function () {
@@ -29,10 +30,10 @@ Route::prefix('page')->name('page.')->group(function () {
     Route::get('/products', [ProductController::class, 'showProduct'])->name('products');
     Route::get('/product-detail/{product}',  [ProductController::class, 'showProductDetail'])->name('product-detail');
 
-    Route::post('/store', [CommentController::class, 'store'])->name('store');
+    Route::post('/store', [CommentController::class, 'store'])->middleware('CheckAdminClient')->name('store');
     // Route::get('/edit/{comment}', [CommentController::class, 'edit'])->name('edit');
     // Route::put('/update/{comment}', [CommentController::class, 'update'])->name('update');
-    Route::delete('/deleteComment/{comment}', [ProductController::class, 'deleteComment'])->name('deleteComment');
+    Route::delete('/deleteComment/{comment}', [ProductController::class, 'deleteComment'])->middleware('CheckAdminClient')->name('deleteComment');
     //trang liên hệ
     Route::get('/about', function () {
         return view('client.about');
@@ -44,7 +45,7 @@ Route::prefix('page')->name('page.')->group(function () {
         Route::post('/store', [ContactController::class, 'storeContact'])->name('store');
     });
 
-    Route::prefix('carts')->name('carts.')->group(function () {
+    Route::prefix('carts')->middleware('CheckAdminClient')->name('carts.')->group(function () {
         Route::get('/', [CartController::class, 'index'])->name('list');
         Route::post('/storeCart', [CartController::class, 'storeCart'])->name('storeCart');
         Route::post('/update/{cart}', [CartController::class, 'update'])->name('update');
@@ -72,6 +73,7 @@ Route::prefix('admin')->middleware('CheckAdminLogin')->name('admin.')->group(fun
         Route::post('/store', [CategoryPostController::class, 'store'])->name('store');
         Route::get('/edit/{categoryPost}', [CategoryPostController::class, 'edit'])->name('edit');
         Route::put('/update/{categoryPost}', [CategoryPostController::class, 'update'])->name('update');
+        Route::post('/updateStatus/{categoryPost}', [CategoryPostController::class, 'updateStatus'])->name('updateStatus');
         Route::delete('/delete/{categoryPost}', [CategoryPostController::class, 'delete'])->name('delete');
     });
 
@@ -82,7 +84,19 @@ Route::prefix('admin')->middleware('CheckAdminLogin')->name('admin.')->group(fun
         Route::post('/store', [CategoryProductController::class, 'store'])->name('store');
         Route::get('/edit/{categoryProduct}', [CategoryProductController::class, 'edit'])->name('edit');
         Route::put('/update/{categoryProduct}', [CategoryProductController::class, 'update'])->name('update');
+        Route::post('/updateStatus/{categoryProduct}', [CategoryProductController::class, 'updateStatus'])->name('updateStatus');
         Route::delete('/delete/{categoryProduct}', [CategoryProductController::class, 'delete'])->name('delete');
+    });
+
+    //size sanr phaam
+    Route::prefix('size')->name('sizes.')->group(function () {
+        Route::get('/', [SizeController::class, 'index'])->name('list');
+        Route::get('/create', [SizeController::class, 'create'])->name('create');
+        Route::post('/store', [SizeController::class, 'store'])->name('store');
+        Route::get('/edit/{size}', [SizeController::class, 'edit'])->name('edit');
+        Route::put('/update/{size}', [SizeController::class, 'update'])->name('update');
+        Route::post('/updateStatus/{size}', [SizeController::class, 'updateStatus'])->name('updateStatus');
+        Route::delete('/delete/{size}', [SizeController::class, 'delete'])->name('delete');
     });
 
     //sản phẩm

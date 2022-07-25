@@ -21,6 +21,9 @@ return new class extends Migration
             $table->string('avatar');
             $table->unsignedBigInteger('category_id');
             $table->foreign('category_id')->references('id')->on('category_products');
+            $table->unsignedBigInteger('size_id');
+            $table->foreign('size_id')->references('id')->on('sizes');
+            $table->integer('statusPrd');
             $table->timestamps();
         });
     }

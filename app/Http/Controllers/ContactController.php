@@ -31,6 +31,6 @@ class ContactController extends Controller
         $contact->fill($request->all());
         $contact->save();
         session()->flash('success', 'Gửi phản hồi thành công.');
-        return redirect()->route('contacts.contact');
+        return redirect()->route('page.contacts.contact');
     }
 }

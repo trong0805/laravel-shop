@@ -20,7 +20,7 @@ class CheckLoginClient
         if (Auth::check()) {
             $user = Auth::user();
             // nếu role = 0 (admin), status =  0 (actived) thì cho qua.
-            if ($user->role == 1 && $user->status == 0) {
+            if ($user->status == 0) {
                 return $next($request);
             } else {
                 Auth::logout();

@@ -30,6 +30,7 @@ class AuthController extends Controller
         // dd($data);
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
+            //lấy thông yin user
             $auth = Auth::user();
             // dd($user);
             if ($auth->role === 0) {

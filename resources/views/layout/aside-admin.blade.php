@@ -103,6 +103,30 @@
                         </li>
                     </ul>
                 </li>
+                {{-- danh sach size v --}}
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-pen"></i>
+                        <p>
+                            Kích cỡ sản phẩm
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('admin.sizes.list') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Danh sách kích cỡ</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('admin.categoryPost.create') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Thêm danh mục</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
                 {{-- sản phẩm v --}}
                 <li class="nav-item">
                     <a href="#" class="nav-link">

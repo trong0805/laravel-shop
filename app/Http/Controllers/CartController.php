@@ -20,7 +20,10 @@ class CartController extends Controller
     }
     public function storeCart(Request $request)
     {
-        // dd($request->all());
+        if(Auth::user() == null){
+            session()->flash('error', 'VÙi lòng đăng nhập để đặt hàng');
+            return redirect()->route('auth.login');
+        }
         $cart = new Cart();
         $cart->userId = $request->userId;
         $cart->productId = $request->productId;

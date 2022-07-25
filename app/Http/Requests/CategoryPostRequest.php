@@ -24,13 +24,15 @@ class CategoryPostRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required'
+            'name' => 'required',
+            // 'statusPost' => 'required',
         ];
     }
     public function messages()
     {
         return [
         'name.required' => 'Tên danh mục không thể để trống!',
+        // 'statusPost.required' => 'Trạng thái không thể để trống!',
         ];
     }
 }

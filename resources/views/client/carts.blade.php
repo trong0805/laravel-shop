@@ -47,6 +47,9 @@
                     <div class="py-2 text-uppercase">Số lượng</div>
                   </th>
                   <th scope="col" class="border-0 bg-light">
+                    <div class="py-2 text-uppercase">Tổng tiền</div>
+                  </th>
+                  <th scope="col" class="border-0 bg-light">
                     <div class="py-2 text-uppercase"></div>
                   </th>
                 </tr>
@@ -69,7 +72,7 @@
                       </div>
                     </div>
                   </th>
-                  <td class="border-0 align-middle"><strong>{{ number_format($item->price) }}</strong></td>
+                  <td class="border-0 align-middle"><strong>{{ number_format($item->price) }}<sup>đ</sup></strong></td>
                   {{-- <td class="border-0 align-middle"><strong>{{ $item->quantity }}</strong></td> --}}
                   <td class="border-0 align-middle">
                     <form action="{{ route('page.carts.update', $item->id) }}" method="post">
@@ -78,6 +81,7 @@
                       <button type="submit" class="btn btn-success"><i class="fas fa-check"></i></button>
                     </form>
                   </td>
+                  <td class="border-0 align-middle"><strong>{{ number_format($item->price * $item->quantity) }}<sup>đ</sup></strong></td>
                   <td class="border-0 align-middle"><a href="#" class="text-dark">
                     <form action="{{ route('page.carts.delete', $item->id) }}" method="post">
                       @csrf

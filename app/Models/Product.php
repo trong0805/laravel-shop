@@ -13,6 +13,14 @@ class Product extends Model
         'price',
         'description',
         'avatar',
+        'size',
+        'statusPrd',
         'category_id'
     ];
+    public function scopeSearch($query) {
+        if($key = request()->search){
+            $query = $query->where('nameProduct','like', '%'.$key.'%');
+        }
+        return $query;
+    }
 }

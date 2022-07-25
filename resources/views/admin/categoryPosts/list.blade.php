@@ -15,6 +15,7 @@
             <tr>
                 <th>Mã id</th>
                 <th>Tên</th>
+                <th>Trạng thái</th>
                 <th>Chức năng</th>
             </tr>
         </thead>
@@ -23,9 +24,22 @@
                 <tr>
                     <td>{{ $item->id }}</td>
                     <td>{{ $item->name }}</td>
+                    <td>
+                        <a onclick="return confirm('Bạn có muốn thay đổi trạng thái danh mục {{ $item->name }}!')">
+                            <form action="{{ route('admin.categoryPost.updateStatus', $item->id) }}" method="post">
+                                @csrf
+                                
+                                @if ($item->statusPost === 1)
+                                    <i class="fab fa-circle alert-danger"></i> Ẩn <button type="submit"  style="background: transparent; border: transparent"><i class="fa fa-redo"></i></button>
+                                @else
+                                    <i class="fab fa-circle alert-success"></i> Hiện thị <button type="submit" style="background: transparent; border: transparent"><i class="fa fa-redo"></i></button>
+                                @endif
+                            </form>
+                        </a>
+                    </td>
                     <td style="display: flex;">
                         <a href="{{ route('admin.categoryPost.edit', $item->id) }}" class="btn btn-warning mx-2">Sửa</a>
-                        <a onclick="return confirm('Bạn có chắc chắn muốn xóa')">
+                        <a onclick="return confirm('Bạn có muốn xóa danh mục {{ $item->name }}')">
                             <form action="{{ route('admin.categoryPost.delete', $item->id) }}" method="post">
                                 @csrf
                                 @method('DELETE')
