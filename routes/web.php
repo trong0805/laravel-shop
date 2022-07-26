@@ -106,6 +106,7 @@ Route::prefix('admin')->middleware('CheckAdminLogin')->name('admin.')->group(fun
         Route::post('/store', [ProductController::class, 'store'])->name('store');
         Route::get('/edit/{product}', [ProductController::class, 'edit'])->name('edit');
         Route::put('/update/{product}', [ProductController::class, 'update'])->name('update');
+        Route::post('/updateStatus/{product}', [ProductController::class, 'updateStatus'])->name('updateStatus');
         Route::delete('/delete/{product}', [ProductController::class, 'delete'])->name('delete');
     });
 
@@ -113,6 +114,7 @@ Route::prefix('admin')->middleware('CheckAdminLogin')->name('admin.')->group(fun
     Route::prefix('contacts')->name('contacts.')->group(function () {
         Route::get('/', [ContactController::class, 'index'])->name('list');
         Route::delete('/delete/{contact}', [ContactController::class, 'delete'])->name('delete');
+        Route::post('/updateAction/{contact}', [ContactController::class, 'updateAction'])->name('updateAction');
     });
     Route::prefix('comments')->name('comments.')->group(function () {
         Route::get('/', [CommentController::class, 'index'])->name('list');

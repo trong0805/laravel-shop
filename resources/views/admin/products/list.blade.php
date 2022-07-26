@@ -18,6 +18,7 @@
                 <th>Ảnh</th>
                 <th>Giá</th>
                 <th>Kích cỡ</th>
+                <th>Trạng thái</th>
                 <th>Mô tả</th>
                 <th>Danh mục</th>
                 <th>Chức năng</th>
@@ -30,15 +31,17 @@
                     <td>{{ $item->nameProduct }}</td>
                     <td><img src="{{ asset($item->avatar) }}" width="100px" alt=""></td>
                     <td>{{ $item->price }}</td>
-                    <td>
-                        @if ($item->size === 1)
-                            Cỡ nhỏ
-                        @elseif ($item->size === 2)
-                            Cỡ vừa
-                        @else
-                            Cỡ lớn
-                        @endif
-                    </td>
+                    <td>{{ $item->nameSize }}</td>
+                    <td><a onclick="return confirm('Bạn có muốn thay đổi trạng thái danh mục {{ $item->name }}!')">
+                        <form action="{{ route('admin.products.updateStatus', $item->id) }}" method="post">
+                            @csrf
+                            @if ($item->statusPrd === 1)
+                                <i class="fab fa-circle alert-danger"></i> Ẩn <button type="submit"  style="background: transparent; border: transparent"><i class="fa fa-redo"></i></button>
+                            @else
+                                <i class="fab fa-circle alert-success"></i> Hiện thị <button type="submit" style="background: transparent; border: transparent"><i class="fa fa-redo"></i></button>
+                            @endif
+                        </form>
+                    </a></td>
                     <td>{{ $item->description }}</td>
                     <td>{{ $item->name }}</td>
                     <td style="display: flex;">

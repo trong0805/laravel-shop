@@ -28,7 +28,7 @@ class ProductRequest extends FormRequest
                 'price' => 'required|integer',
                 'description' => 'required|max:3000',
                 'category_id' => 'required',
-                'size' => 'required'
+                'size_id' => 'required'
         ];
     }
     public function messages() {
@@ -39,7 +39,7 @@ class ProductRequest extends FormRequest
             'price.integer' => 'Giá sản phẩm phải là số dương',
             'description.required' => 'Tiêu đề sản phẩm không được để trống',
             'description.max' => 'Mô tả sản phẩm không được quá 3000 kí tự',
-            'size.required' => 'Kích cỡ sản phẩm không được để trống',
+            'size_id.required' => 'Kích cỡ sản phẩm không được để trống',
             'category_id.required' => 'Danh mục sản phẩm không được để trống',
 
         ];

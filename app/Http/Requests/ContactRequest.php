@@ -26,8 +26,8 @@ class ContactRequest extends FormRequest
         return [
             'name'=> 'required|max:55',
             'email' => 'required|email',
-            'title' => 'required|min:6|max:255',
-            'content' => 'required|min:6|max:2000'
+            'title' => 'required|max:255',
+            'content' => 'required|max:2000'
         ];
     }
     public function messages()
@@ -38,10 +38,8 @@ class ContactRequest extends FormRequest
             'email.required' => 'Email của bạn không được để trống',
             'email.email' => 'Email phải đúng định dạng',
             'title.required' => 'Tiêu đề của bạn không được để trống',
-            'title.min' => 'Tên của bạn không được nhỏ hơn 6 kí tự',
             'title.max' => 'Tên của bạn không được quá 55 kí tự',
             'content.required' => 'Nội dung của bạn không được để trống',
-            'content.min' => 'Tên của bạn không được nhỏ hơn 6 kí tự',
             'content.max' => 'Tên của bạn không được quá 2000 kí tự',
 
         ];

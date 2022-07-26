@@ -4,7 +4,7 @@
     @if ($errors->any() || session()->has('error'))
         <div class="alert alert-danger">
             <ul>
-            {{-- {{ dd($errors->all()); }} --}}
+                {{-- {{ dd($errors->all()); }} --}}
 
                 <li>{{ session()->get('error') }}</li>
                 @foreach ($errors->all() as $error)
@@ -30,15 +30,19 @@
             <label class="form-label">Giá sản phẩm</label>
             <input type="text" name="price" placeholder="Giá sản phẩm" class="form-control"
                 value="{{ isset($data) ? $data->price : old('price') }}" />
-                @if ($errors->any())
-                {{ $errors->all()[1] }}
-                @endif
         </div>
-        <div class="form-outline mb-4">
-            <label class="form-label">Ảnh sản phẩm</label> <br>
-            <img src="{{ isset($data) ? asset($data->avatar) : '' }}" width="300px" alt="">
-            <input type="file" name="avatar" value="{{ isset($data) ? $data->avatar : old('avatar') }}"
-                placeholder="Chọn ảnh sản phẩm" class="form-control" />
+        <div class="form-outline mb-4 d-flex">
+            <div class="col-md-6">
+                <label class="form-label">Ảnh sản phẩm</label> <br>
+                <input type="file" name="avatar" class="form-control"
+                    value="{{ isset($data) ? $data->avatar : old('avatar') }}" placeholder="Chọn ảnh sản phẩm" />
+                <img src="{{ isset($data) ? asset($data->avatar) : '' }}" width="300px" alt="">
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Thư viện ảnh</label> <br>
+                <input type="file" name="filenames[]" multiple class="form-control"
+                    placeholder="Chọn ảnh sản phẩm" />
+            </div>
         </div>
         <div class="form-outline mb-4">
             <label class="form-label">Mô tả sản phẩm</label>
@@ -49,37 +53,43 @@
             {{-- </textarea> --}}
         </div>
         @if (!isset($data))
-        <div class="form-outline mb-4">
-            <label class="form-label">Trạng thái</label> <br>
-            <input type="radio" name="statusPrd" value="0" /> Hiển thị
-            <input type="radio" name="statusPrd" value="1" /> Ẩn
-        </div>
+            <div class="form-outline mb-4">
+                <label class="form-label">Trạng thái</label> <br>
+                <input type="radio" name="statusPrd" value="0" /> Hiển thị
+                <input type="radio" name="statusPrd" value="1" /> Ẩn
+            </div>
         @else
-        <div class="form-outline mb-4" hidden>
-            <label class="form-label">Trạng thái</label> <br>
-            <input type="radio" name="statusPrd" value="0" {{ $data->statusPrd === 0 ? 'checked' : '' }}/> Hiển thị
-            <input type="radio" name="statusPrd" value="1" {{ $data->statusPrd === 1 ? 'checked' : '' }}/> Ẩn
-        </div>
+            <div class="form-outline mb-4" hidden>
+                <label class="form-label">Trạng thái</label> <br>
+                <input type="radio" name="statusPrd" value="0" {{ $data->statusPrd === 0 ? 'checked' : '' }} /> Hiển
+                thị
+                <input type="radio" name="statusPrd" value="1" {{ $data->statusPrd === 1 ? 'checked' : '' }} /> Ẩn
+            </div>
         @endif
-        <div class="form-outline mb-4">
-            <label class="form-label">Kích cỡ</label> <br>
-            <select name="size" id="">
-                <option value="">Chọn kích cỡ sản phẩm</option>
-                <option value="1">Cỡ nhỏ</option>
-                <option value="2">Cỡ vừa</option>
-                <option value="3">Cỡ lớn</option>
-            </select>
-        </div>
-        <div class="form-outline mb-4">
-            <label class="form-label">Danh mục sản phẩm</label> <br>
-            <select name="category_id" id="">
-                <option value="">Chọn danh mục sản phẩm</option>
-                @foreach ($cate as $item)
-                    {{-- <option value="{{ $item->id }}" {{ isset($data) && $data->category_id ? 'selected' : '' }} >{{ isset($data) && $data->category_id ? $data->name : $item->name }}</option> --}}
-                    <option value="{{ $item->id }}" {{ isset($data) && $data->category_id ? 'selected' : '' }}>
-                        {{ isset($data) && $data->category_id ? $item->name : $item->name }}</option>
-                @endforeach
-            </select>
+        <div class="form-outline mb-4 d-flex">
+            <div class="col-md-6">
+                <label class="form-label">Kích cỡ</label> <br>
+                <select class="w-100 p-2" name="size_id" id="">
+                    <option value="">Chọn kích cỡ sản phẩm</option>
+                    @foreach ($sizes as $item)
+                        <option value="{{ $item->id }}"
+                            {{ isset($data) && $data->size_id == $item->id ? 'selected' : '' }}>
+                            {{ $item->nameSize }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Danh mục sản phẩm</label> <br>
+                <select class="w-100 p-2" name="category_id" id="">
+                    <option value="">Chọn danh mục sản phẩm</option>
+                    @foreach ($cate as $item)
+                        {{-- <option value="{{ $item->id }}" {{ isset($data) && $data->category_id ? 'selected' : '' }} >{{ isset($data) && $data->category_id ? $data->name : $item->name }}</option> --}}
+                        <option value="{{ $item->id }}"
+                            {{ isset($data) && $data->category_id == $item->id ? 'selected' : '' }}>
+                            {{ $item->name }}</option>
+                    @endforeach
+                </select>
+            </div>
         </div>
         <!-- Submit button -->
         <div>

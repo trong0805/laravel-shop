@@ -28,27 +28,33 @@
                 <div class="col-md-12 d-flex">
                     <div class="col-lg-6 col-md-6">
                         <img width="100%" class="border" src="{{ asset($dataProduct->avatar) }}" alt="">
+                        <div class="row-grid d-flex">
+                            @foreach ($galleryImages as $img)
+                                <div class="col-lg-4">
+                                    <img width="100%" class="border" src="{{ asset($img->image_gallery) }}"
+                                        alt="">
+                                </div>
+                            @endforeach
+                        </div>
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <div class="product-item">
                             <div class="down-content">
                                 {{-- <h3> --}}
-                                    <h4 style="font-size: 38px;">{{ $dataProduct->nameProduct }}</h4>
-                                    @foreach ($cate as $item)
-                                        @if ($item->id === $dataProduct->category_id)
-                                            <p class="mb-0">Loại sản phẩm: {{ $item->name }}</p>
-                                        @endif
-                                    @endforeach
-                                {{-- </h3>  --}}
-                                <p> Kích cỡ : @if ($item->size === 1)
-                                        Cỡ nhỏ
-                                    @elseif ($item->size === 2)
-                                        Cỡ vừa
-                                    @else
-                                        Cỡ lớn
+                                <h4 style="font-size: 38px;">{{ $dataProduct->nameProduct }}</h4>
+                                @foreach ($cate as $item)
+                                    @if ($item->id === $dataProduct->category_id)
+                                        <p class="mb-0">Loại sản phẩm: {{ $item->name }}</p>
                                     @endif
-                                </p>
-                                <p style="font-size: 26px; color: rgb(255, 85, 85);"> Giá: {{ number_format($dataProduct->price) }}<sup>đ</sup></p>
+                                @endforeach
+                                {{-- </h3> --}}
+                                @foreach ($sizes as $item)
+                                    @if ($item->id === $dataProduct->size_id)
+                                        <p class="mb-0">Kích cỡ: {{ $item->nameSize }}</p>
+                                    @endif
+                                @endforeach
+                                <p style="font-size: 26px; color: rgb(255, 85, 85);"> Giá:
+                                    {{ number_format($dataProduct->price) }}<sup>đ</sup></p>
                                 <p> {{ $dataProduct->description }}</p>
                                 {{-- thêm vào giỏ --}}
                                 <form action="{{ route('page.carts.storeCart') }}" method="post">
@@ -133,14 +139,8 @@
                                             </a>
                                             <p class="m-0">Giá: {{ number_format($item->price) }} <sup>đ</sup></p>
                                             <p class="my-0">Loại sản phẩm : {{ $item->name }}</p>
-                                            <p class="my-0">Kích cỡ : @if ($item->size === 1)
-                                                Cỡ nhỏ
-                                            @elseif ($item->size === 2)
-                                                Cỡ vừa
-                                            @else
-                                                Cỡ lớn
-                                            @endif
-                                        </p>
+                                            <p class="my-0">Kích cỡ : {{ $item->nameSize }}
+                                            </p>
                                             <ul class="stars">
                                                 <li><i class="fa fa-star"></i></li>
                                                 <li><i class="fa fa-star"></i></li>

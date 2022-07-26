@@ -23,6 +23,19 @@ class ContactController extends Controller
         //tạo phản hồi ở trang contact    
         return view('client.contact');
     }
+    public function updateAction($contact)
+    {
+        $data = Contact::find($contact);
+        if ($data->action == 0) {
+            $data->action = 1;
+        } else {
+            $data->action = 0;
+        }
+        // $data->status = $data->status;
+        $data->save();
+        session()->flash('success', 'Cập nhật trạng thái thành công!');
+        return redirect()->route('admin.contacts.list');
+    }
     public function storeContact(ContactRequest $request) {
         //tạo phản hồi ở trang contact
         // dd($request->all());

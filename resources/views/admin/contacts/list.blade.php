@@ -24,7 +24,16 @@
                     <td>{{ $item->email }}</td>
                     <td>{{ $item->title }}</td>
                     <td>{{ $item->content }}</td>
-                    <td>{{ $item->action == 0 ? 'Chưa phản hồi' : 'Đã phản hồi' }}</td>
+                    <td><a onclick="return confirm('Bạn có muốn thay đổi trạng thái!')">
+                        <form action="{{ route('admin.contacts.updateAction', $item->id) }}" method="post">
+                            @csrf
+                            @if ($item->action == 0)
+                                <i class="fab fa-circle alert-success"></i> Hiện thị <button type="submit" style="background: transparent; border: transparent"><i class="fa fa-redo"></i></button>
+                            @else
+                                <i class="fab fa-circle alert-danger"></i> Ẩn <button type="submit"  style="background: transparent; border: transparent"><i class="fa fa-redo"></i></button>
+                            @endif
+                        </form>
+                    </a></td>
                     <td>
                         <a onclick="return confirm('Bạn có chắc chắn muốn xóa')">
                             <form action="{{ route('admin.contacts.delete', $item->id) }}" method="post">

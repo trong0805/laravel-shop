@@ -63,13 +63,7 @@
                                                 </a>
                                                 <p class="m-0">Giá: {{ number_format($item->price) }} <sup>đ</sup></p>
                                                 <p class="my-0">Loại sản phẩm : {{ $item->name }}</p>
-                                                <p class="my-0">Kích cỡ : @if ($item->size === 1)
-                                                        Cỡ nhỏ
-                                                    @elseif ($item->size === 2)
-                                                        Cỡ vừa
-                                                    @else
-                                                        Cỡ lớn
-                                                    @endif
+                                                <p class="my-0">Kích cỡ : {{ $item->nameSize }}
                                                 </p>
                                                 <ul class="stars">
                                                     <li><i class="fa fa-star"></i></li>
