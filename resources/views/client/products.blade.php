@@ -21,16 +21,20 @@
                 <div class="col-md-12">
                     <div class="filters">
                         <ul>
-                            <li class="active" data-filter="*"><h3>Tất cả sản phẩm</h3></li>
+                            <li class="active" data-filter="*">
+                                <h3>Tất cả sản phẩm</h3>
+                            </li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-md-12">
                     <div class="filters-content d-flex">
-                        <div class="col-md-3 col-lg-3 border p-0 text-white">
+                        <div class="col-md-3 col-lg-3  p-0 text-white">
                             <div class="filters">
                                 <form action="" class="form-group d-flex">
-                                    <input type="text" class="form-control mr-1" name="search" placeholder="Tìm kiếm tên sản phẩm"> <button class="btn btn-primary">Tìm kiếm</button>
+                                    <input type="text" class="form-control mr-1" name="search"
+                                        placeholder="Tìm kiếm tên sản phẩm"> <button class="btn btn-primary">Tìm
+                                        kiếm</button>
                                 </form>
                                 <h4 class="p-3 mb-2" style="background-color: #f33f3f;">Lọc theo danh mục</h4>
                                 <ul>
@@ -59,11 +63,13 @@
                                                     src="{{ asset($item->avatar) }}" alt=""></a>
                                             <div class="down-content">
                                                 <a href="{{ route('page.product-detail', $item->id) }}" class="d-block">
-                                                    <h5 class="text-capitalize">{{ $item->nameProduct }}</h5>
+                                                    <h5 class="text-capitalize nameCut">{{ $item->nameProduct }}</h5>
                                                 </a>
-                                                <p class="m-0">Giá: {{ number_format($item->price) }} <sup>đ</sup></p>
-                                                <p class="my-0">Loại sản phẩm : {{ $item->name }}</p>
-                                                <p class="my-0">Kích cỡ : {{ $item->nameSize }}
+                                                <p class="m-0">Giá : {{ number_format($item->price) }} <sup>đ</sup></p>
+                                                <div class="d-flex justify-content-between">
+                                                    <p class="my-0">Loại : {{ $item->name }}</p>
+                                                    <p class="my-0">Kích cỡ : {{ $item->nameSize }}
+                                                </div>
                                                 </p>
                                                 <ul class="stars">
                                                     <li><i class="fa fa-star"></i></li>
@@ -96,4 +102,5 @@
         background-color: rgb(255, 255, 255);
         border-bottom: 0.4px solid #f33f3f;
     }
+  
 </style>

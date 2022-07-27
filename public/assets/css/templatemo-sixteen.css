@@ -1059,3 +1059,9 @@ footer .inner-content p a {
 		bottom: 0;
 	}
 }
+.nameCut {
+    /* width: 500px; */
+    overflow: hidden;
+    white-space: nowrap; 
+    text-overflow: ellipsis;
+}

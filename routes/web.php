@@ -11,7 +11,9 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SizeController;
 use App\Models\Product;
-
+Route::get('/', function () {
+    return view('welcome');
+});
 Route::prefix('auth')->name('auth.')->group(function () {
     Route::get('/login', [AuthController::class, 'login'])->name('login');
     Route::post('/postLogin', [AuthController::class, 'postLogin'])->name('postLogin');

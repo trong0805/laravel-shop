@@ -19,6 +19,7 @@ class AuthController extends Controller
 
     public function login()
     {
+        session(['link' => url()->previous()]);
         return view('login.login');
     }
     public function postLogin(AuthRequest $request)
@@ -36,7 +37,8 @@ class AuthController extends Controller
             if ($auth->role === 0) {
                 return redirect()->route('admin.users.list');
             } elseif ($auth->role === 1 && $auth->status === 0) {
-                return redirect()->route('page.home');
+                // return redirect()->route('auth.home');
+                return redirect(session('link'));
             } else {
                 session()->flash('error', 'Tài khoản của bạn chưa được kích hoạt!');
                 return redirect()->route('auth.login');

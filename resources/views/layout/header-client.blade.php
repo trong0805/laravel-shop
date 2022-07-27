@@ -15,9 +15,9 @@
             <li class="nav-item">
               <a class="nav-link" href="{{ route('page.products') }}">Our Products</a>
             </li>
-            <li class="nav-item">
+            {{-- <li class="nav-item">
               <a class="nav-link" href="{{ route('page.about') }}">About Us</a>
-            </li>
+            </li> --}}
             <li class="nav-item">
               <a class="nav-link" href="{{ route('page.contacts.contact') }}">Contact Us</a>
             </li>

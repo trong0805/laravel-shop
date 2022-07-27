@@ -16,14 +16,14 @@ class ProductController extends Controller
     public function index()
     {
         $products = DB::table('products')->join('category_products', 'products.category_id', '=', 'category_products.id')
-            ->join('sizes', 'products.size_id', '=', 'sizes.id')
+            ->join('sizes', 'products.size_id', '=', 'sizes.id')->where('statusCate', '=', 0)
             ->select('products.*', 'category_products.name', 'sizes.nameSize')->orderBy('products.id', 'ASC')->Paginate(6);
         return view('admin.products.list', compact('products'));
     }
     public function create()
     {
-        $cate = CategoryProduct::all();
-        $sizes = Size::all();
+        $cate = CategoryProduct::all()->where('statusCate', '=', 0);
+        $sizes = Size::all()->where('statusSize', '=', 0);
 
         return view('admin.products.add-edit', compact('cate', 'sizes'));
     }
@@ -89,11 +89,10 @@ class ProductController extends Controller
         $files = [];
         if ($request->hasFile('filenames')) {
             foreach ($request->file('filenames') as $file) {
-
+                $images = new GalleryImage();
                 $name = $file->getClientOriginalName();
                 $file->move(public_path('images/GalleryProducts'), $name);
                 $files[] = $name;
-                $images = new GalleryImage();
                 foreach ($files as $ok) {
                     $images->image_gallery = 'images/GalleryProducts/' . $ok;
                 }
@@ -119,9 +118,9 @@ class ProductController extends Controller
         $products = Product::select('products.*', 'category_products.name', 'sizes.nameSize')
             ->join('category_products', 'products.category_id', '=', 'category_products.id')
             ->join('sizes', 'products.size_id', '=', 'sizes.id')
-            ->where('statusPrd', '=', 0)->search()->Paginate(5);
-
-        // \dd($products);
+            ->where('statusPrd', '=', 0)->where('statusCate', '=', 0)->search()->Paginate(5);
+        
+        // \dd($galleryImages);
         return view('client.products', compact('products', 'cate'));
     }
     public function updateStatus($product)
@@ -162,6 +161,6 @@ class ProductController extends Controller
     {
         $data = Comment::find($comment);
         $data->delete();
-        return redirect()->route('page.product-detail', $comment->product_id);
+        return redirect()->route('page.product-detail', $data->product_id);
     }
 }

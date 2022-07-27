@@ -26,31 +26,33 @@
                     </div>
                 </div>
                 <div class="col-md-12 d-flex">
-                    <div class="col-lg-6 col-md-6">
-                        <img width="100%" class="border" src="{{ asset($dataProduct->avatar) }}" alt="">
+                    <div class="col-lg-7 col-md-7">
+                        <img width="100%" id="imgClick" class="border" src="{{ asset($dataProduct->avatar) }}" alt="">
                         <div class="row-grid d-flex">
+                            <div class="col-lg-3">
+                                <img width="100%" class="border" src="{{ asset($dataProduct->avatar) }}" onclick=" changeImage('{{asset($dataProduct->avatar)}}');" alt="">
+                            </div>
                             @foreach ($galleryImages as $img)
-                                <div class="col-lg-4">
-                                    <img width="100%" class="border" src="{{ asset($img->image_gallery) }}"
-                                        alt="">
+                                <div class="col-lg-3">
+                                    <img width="100%" class="border" src="{{ asset($img->image_gallery) }}" onclick=" changeImage('{{asset($img->image_gallery)}}');" alt="">
                                 </div>
                             @endforeach
                         </div>
                     </div>
-                    <div class="col-lg-6 col-md-6">
+                    <div class="col-lg-5 col-md-5">
                         <div class="product-item">
                             <div class="down-content">
                                 {{-- <h3> --}}
                                 <h4 style="font-size: 38px;">{{ $dataProduct->nameProduct }}</h4>
                                 @foreach ($cate as $item)
                                     @if ($item->id === $dataProduct->category_id)
-                                        <p class="mb-0">Loại sản phẩm: {{ $item->name }}</p>
+                                        <p class="mb-1">Loại sản phẩm: {{ $item->name }}</p>
                                     @endif
                                 @endforeach
                                 {{-- </h3> --}}
                                 @foreach ($sizes as $item)
                                     @if ($item->id === $dataProduct->size_id)
-                                        <p class="mb-0">Kích cỡ: {{ $item->nameSize }}</p>
+                                        <p class="mb-3">Kích cỡ: {{ $item->nameSize }}</p>
                                     @endif
                                 @endforeach
                                 <p style="font-size: 26px; color: rgb(255, 85, 85);"> Giá:
@@ -72,8 +74,18 @@
                                     <li><i class="fa fa-star"></i></li>
                                     <li><i class="fa fa-star"></i></li>
                                     <li><i class="fa fa-star"></i></li>
-                                </ul>
+                                </ul>   
                             </div>
+                             <div class="col-md-12">
+                                    <div class="left-content">
+                                        <ul class="social-icons">
+                                            <li><a href="#" style="padding: 16px;"><i class="fa fa-facebook"></i></a></li>
+                                            <li><a href="#" style="padding: 16px;"><i class="fa fa-twitter"></i></a></li>
+                                            <li><a href="#" style="padding: 16px;"><i class="fa fa-linkedin"></i></a></li>
+                                            <li><a href="#" style="padding: 16px;"><i class="fa fa-behance"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
                         </div>
                     </div>
                 </div>
@@ -111,6 +123,11 @@
                     @endforeach
                     <div class="my-2">{{ $comments->links() }}</div>
                     @if (Auth::user())
+                        @if (session()->has('error'))
+                            <div class="alert alert-danger">
+                                {{ session()->get('error') }}
+                            </div>
+                        @endif
                         <form action="{{ route('page.store') }}" method="POST">
                             @csrf
                             <div class="form-group d-flex">
@@ -132,14 +149,16 @@
                                 <div class="col-lg-4 col-md-4 all prd{{ $item->category_id }}">
                                     <div class="product-item">
                                         <a href="{{ route('page.product-detail', $item->id) }}"><img
-                                                src="{{ asset('assets/images/product_06.jpg') }}" alt=""></a>
+                                                src="{{ asset($item->avatar) }}" alt=""></a>
                                         <div class="down-content">
                                             <a href="{{ route('page.product-detail', $item->id) }}" class="d-block">
-                                                <h5 class="text-capitalize">{{ $item->nameProduct }}</h5>
+                                                <h5 class="text-capitalize nameCut">{{ $item->nameProduct }}</h5>
                                             </a>
-                                            <p class="m-0">Giá: {{ number_format($item->price) }} <sup>đ</sup></p>
-                                            <p class="my-0">Loại sản phẩm : {{ $item->name }}</p>
-                                            <p class="my-0">Kích cỡ : {{ $item->nameSize }}
+                                            <p class="m-0">Giá : {{ number_format($item->price) }} <sup>đ</sup></p>
+                                            <div class="d-flex justify-content-between">
+                                                <p class="my-0">Loại : {{ $item->name }}</p>
+                                                <p class="my-0">Kích cỡ : {{ $item->nameSize }}
+                                            </div>
                                             </p>
                                             <ul class="stars">
                                                 <li><i class="fa fa-star"></i></li>
@@ -148,6 +167,7 @@
                                                 <li><i class="fa fa-star"></i></li>
                                                 <li><i class="fa fa-star"></i></li>
                                             </ul>
+                                            
                                             {{-- <span>Reviews (72)</span> --}}
                                         </div>
                                     </div>
@@ -160,3 +180,9 @@
         </div>
     </div>
 @endsection()
+<script type="text/javascript">
+    function changeImage(a) {
+        console.log(document.getElementById("imgClick").src="a");
+        document.getElementById("imgClick").src=a;
+    }
+</script>

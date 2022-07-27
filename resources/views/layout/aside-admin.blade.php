@@ -122,7 +122,7 @@
                         <li class="nav-item">
                             <a href="{{ route('admin.categoryPost.create') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Thêm danh mục</p>
+                                <p>Thêm kích cỡ</p>
                             </a>
                         </li>
                     </ul>
