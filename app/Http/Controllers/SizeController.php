@@ -20,7 +20,7 @@ class SizeController extends Controller
     {
         $data = new Size();
         if ($request->nameSize == null) {
-            session()->flash('error', 'Tên kích cỡ không được để trống!');
+            session()->flash('errorr', 'Tên kích cỡ không được để trống!');
             return redirect()->route('admin.sizes.create');
         }
         if ($request->statusSize == null) {

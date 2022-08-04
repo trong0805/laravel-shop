@@ -1,13 +1,14 @@
 @extends('layout.master-admin')
 @section('title', 'Thêm danh mục bài viết')
 @section('content')
-    @if ($errors->any() || session()->has('error'))
+    @if (session()->has('error'))
+        {{-- $errors->any() || --}}
         <div class="alert alert-danger">
             <ul>
                 <li>{{ session()->get('error') }}</li>
-                @foreach ($errors->all() as $error)
+                {{-- @foreach ($errors->all() as $error)
                     <li>{{ $error }}</li>
-                @endforeach
+                @endforeach --}}
             </ul>
         </div>
     @endif
@@ -25,19 +26,30 @@
             <label class="form-label">Tên danh mục</label>
             <input type="text" name="name" placeholder="Nhập tên danh mục bài viết" class="form-control"
                 value="{{ isset($category) ? $category->name : old('name') }}" />
+            @if ($errors->has('name'))
+                <p class="text-danger">{{ $errors->first('name') }}</p>
+            @endif
         </div>
         @if (!isset($category))
-        <div class="form-outline mb-4">
-            <label class="form-label">Trạng thái</label> <br>
-            <input type="radio" name="statusPost" value="0" /> Hiển thị
-            <input type="radio" name="statusPost" value="1" /> Ẩn
-        </div>
+            <div class="form-outline mb-4">
+                <label class="form-label">Trạng thái</label> <br>
+                <input type="radio" name="statusPost" value="0" /> Hiển thị
+                <input type="radio" name="statusPost" value="1" /> Ẩn
+            </div>
+            @if ($errors->has('statusPost'))
+                <p class="text-danger">{{ $errors->first('statusPost') }}</p>
+            @endif
         @else
-        <div class="form-outline mb-4" hidden>
-            <label class="form-label">Trạng thái</label> <br>
-            <input type="radio" name="statusPost" value="0" {{ $category->statusPost === 0 ? 'checked' : '' }}/> Hiển thị
-            <input type="radio" name="statusPost" value="1" {{ $category->statusPost === 1 ? 'checked' : '' }}/> Ẩn
-        </div>
+            <div class="form-outline mb-4" hidden>
+                <label class="form-label">Trạng thái</label> <br>
+                <input type="radio" name="statusPost" value="0" {{ $category->statusPost === 0 ? 'checked' : '' }} />
+                Hiển thị
+                <input type="radio" name="statusPost" value="1" {{ $category->statusPost === 1 ? 'checked' : '' }} />
+                Ẩn
+            </div>
+            @if ($errors->has('statusPost'))
+                <p class="text-danger">{{ $errors->first('statusPost') }}</p>
+            @endif
         @endif
         <!-- Submit button -->
         <div>

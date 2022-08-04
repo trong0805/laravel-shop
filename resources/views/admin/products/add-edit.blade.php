@@ -1,18 +1,6 @@
 @extends('layout.master-admin')
 @section('title', 'Thêm sản phẩm')
 @section('content')
-    @if ($errors->any() || session()->has('error'))
-        <div class="alert alert-danger">
-            <ul>
-                {{-- {{ dd($errors->all()); }} --}}
-
-                <li>{{ session()->get('error') }}</li>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
     <form action="{{ isset($data) ? route('admin.products.update', $data->id) : route('admin.products.store') }}"
         method="POST" enctype="multipart/form-data">
         <div class="alert alert-default-info">
@@ -25,11 +13,17 @@
             <label class="form-label">Tên sản phẩm</label>
             <input type="text" name="nameProduct" placeholder="Tên sản phẩm" class="form-control"
                 value="{{ isset($data) ? $data->nameProduct : old('nameProduct') }}" />
+            @if ($errors->has('nameProduct'))
+                <p class="text-danger">{{ $errors->first('nameProduct') }}</p>
+            @endif
         </div>
         <div class="form-outline mb-4">
             <label class="form-label">Giá sản phẩm</label>
             <input type="text" name="price" placeholder="Giá sản phẩm" class="form-control"
                 value="{{ isset($data) ? $data->price : old('price') }}" />
+            @if ($errors->has('price'))
+                <p class="text-danger">{{ $errors->first('price') }}</p>
+            @endif
         </div>
         <div class="form-outline mb-4 d-flex">
             <div class="col-md-6">
@@ -37,20 +31,22 @@
                 <input type="file" name="avatar" class="form-control"
                     value="{{ isset($data) ? $data->avatar : old('avatar') }}" placeholder="Chọn ảnh sản phẩm" />
                 <img src="{{ isset($data) ? asset($data->avatar) : '' }}" width="300px" alt="">
+                @if (session()->has('error'))
+                    <p class="text-danger">{{ session()->get('error') }}</p>
+                @endif
             </div>
             <div class="col-md-6">
                 <label class="form-label">Thư viện ảnh</label> <br>
-                <input type="file" name="filenames[]" multiple class="form-control"
-                    placeholder="Chọn ảnh sản phẩm" />
+                <input type="file" name="filenames[]" multiple class="form-control" placeholder="Chọn ảnh sản phẩm" />
             </div>
         </div>
         <div class="form-outline mb-4">
             <label class="form-label">Mô tả sản phẩm</label>
             <input type="text" name="description" placeholder="Mô tả sản phẩm" class="form-control"
                 value="{{ isset($data) ? $data->description : old('description') }}" />
-            {{-- <textarea name="description"  placeholder="Mô tả sản phẩm" class="form-control"
-                value="{{ isset($data) ? $data->description : old('description') }}" class="form_input"> --}}
-            {{-- </textarea> --}}
+            @if ($errors->has('description'))
+                <p class="text-danger">{{ $errors->first('description') }}</p>
+            @endif
         </div>
         @if (!isset($data))
             <div class="form-outline mb-4">
@@ -58,6 +54,9 @@
                 <input type="radio" name="statusPrd" value="0" /> Hiển thị
                 <input type="radio" name="statusPrd" value="1" /> Ẩn
             </div>
+            @if ($errors->has('statusPrd'))
+                <p class="text-danger">{{ $errors->first('statusPrd') }}</p>
+            @endif
         @else
             <div class="form-outline mb-4" hidden>
                 <label class="form-label">Trạng thái</label> <br>
@@ -65,6 +64,9 @@
                 thị
                 <input type="radio" name="statusPrd" value="1" {{ $data->statusPrd === 1 ? 'checked' : '' }} /> Ẩn
             </div>
+            @if ($errors->has('statusPrd'))
+                <p class="text-danger">{{ $errors->first('statusPrd') }}</p>
+            @endif
         @endif
         <div class="form-outline mb-4 d-flex">
             <div class="col-md-6">
@@ -77,6 +79,9 @@
                             {{ $item->nameSize }}</option>
                     @endforeach
                 </select>
+                @if ($errors->has('size_id'))
+                    <p class="text-danger">{{ $errors->first('size_id') }}</p>
+                @endif
             </div>
             <div class="col-md-6">
                 <label class="form-label">Danh mục sản phẩm</label> <br>
@@ -89,6 +94,9 @@
                             {{ $item->name }}</option>
                     @endforeach
                 </select>
+                @if ($errors->has('category_id'))
+                    <p class="text-danger">{{ $errors->first('category_id') }}</p>
+                @endif
             </div>
         </div>
         <!-- Submit button -->

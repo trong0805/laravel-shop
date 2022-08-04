@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CategoryPostRequest extends FormRequest
+class UserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,14 +25,17 @@ class CategoryPostRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            // 'statusPost' => 'required',
+            'email' => 'required|email',
+            'username' => 'required',
         ];
     }
     public function messages()
     {
         return [
-        'name.required' => 'Tên danh mục không thể để trống!',
-        'statusPost.required' => 'Trạng thái không thể để trống!',
+            'name.required' => 'Tên không được để trống!',
+            'email.required' => 'Email không được để trống!',
+            'email.email' => 'Email phải đúng định dạng!',
+            'username.required' => 'Họ và tên không được để trống!',
         ];
     }
 }

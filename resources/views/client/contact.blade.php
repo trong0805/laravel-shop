@@ -33,7 +33,9 @@
                 <div class="col-md-4">
                     <div class="left-content">
                         <h4>Về chúng tôi</h4>
-                        <p>Xuất phát từ niềm đam mê với nội thất và đam mê cái đẹp. SIXTEEN ở đây để giúp bạn tạo nên những không gian tuyệt vời nhất và tốt nhất theo cách của riêng bạn. Sứ mệnh của chúng tôi luôn tạo ra những sản phẩm đẳng cấp nhất thể hiện bản sắc và tính cách riêng của gia chủ.
+                        <p>Xuất phát từ niềm đam mê với nội thất và đam mê cái đẹp. SIXTEEN ở đây để giúp bạn tạo nên những
+                            không gian tuyệt vời nhất và tốt nhất theo cách của riêng bạn. Sứ mệnh của chúng tôi luôn tạo ra
+                            những sản phẩm đẳng cấp nhất thể hiện bản sắc và tính cách riêng của gia chủ.
                         <ul class="social-icons">
                             <li><a href="#"><i class="fa fa-facebook"></i></a></li>
                             <li><a href="#"><i class="fa fa-twitter"></i></a></li>
@@ -57,7 +59,7 @@
                 </div>
                 <div class="col-md-8">
                     <div class="contact-form">
-                        @if ($errors->any())
+                        {{-- @if ($errors->any())
                             <div class="alert alert-danger">
                                 <ul>
                                     @foreach ($errors->all() as $error)
@@ -65,42 +67,54 @@
                                     @endforeach
                                 </ul>
                             </div>
+                        @endif --}}
+                        @if (session()->has('success'))
+                            <div class="alert alert-success">
+                                {{ session()->get('success') }}
+                            </div>
                         @endif
-                        @if(session()->has('success'))
-                        <div class="alert alert-success">
-                          {{ session()->get('success') }}
-                        </div>
-                      @endif
                         <form id="contact" action="{{ route('page.contacts.store') }}" method="post">
                             @csrf
                             <div class="row">
                                 <div class="col-lg-12 col-md-12 col-sm-12">
                                     <fieldset>
-                                        <input name="name" type="text" value="{{ old('name') }}"
+                                        <input style="margin: 20px 0px 0px 0px;" name="name" type="text" value="{{ old('name') }}"
                                             class="form-control" id="name" placeholder="Tên của bạn">
-                                            <input type="hidden" value="0" name="action">
+                                        @if ($errors->has('name'))
+                                            <p class="text-danger">{{ $errors->first('name') }}</p>
+                                        @endif
                                     </fieldset>
                                 </div>
                                 <div class="col-lg-12 col-md-12 col-sm-12">
                                     <fieldset>
-                                        <input name="email" type="text" class="form-control" id="email"
-                                            placeholder="Địa chỉ E-Mail"value="{{ old('email') }}"> 
+                                        <input style="margin: 20px 0px 0px 0px;" name="email" type="text" class="form-control" id="email"
+                                            placeholder="Địa chỉ E-Mail"value="{{ old('email') }}">
+                                        @if ($errors->has('email'))
+                                            <p class="text-danger">{{ $errors->first('email') }}</p>
+                                        @endif
                                     </fieldset>
                                 </div>
                                 <div class="col-lg-12 col-md-12 col-sm-12">
                                     <fieldset>
-                                        <input name="title" type="text" class="form-control" id="title"
+                                        <input style="margin: 20px 0px 0px 0px;" name="title" type="text" class="form-control" id="title"
                                             placeholder="Tiêu đề" value="{{ old('title') }}">
+                                        @if ($errors->has('title'))
+                                            <p class="text-danger">{{ $errors->first('title') }}</p>
+                                        @endif
                                     </fieldset>
                                 </div>
                                 <div class="col-lg-12">
                                     <fieldset>
-                                        <textarea name="content" rows="6" class="form-control" id="content" placeholder="Nội dung" value="{{ old('content') }}"></textarea>
+                                        <textarea style="margin: 20px 0px 0px 0px;" name="content" rows="6" class="form-control" id="content" placeholder="Nội dung"
+                                            value="{{ old('content') }}"></textarea>
+                                        @if ($errors->has('content'))
+                                            <p class="text-danger">{{ $errors->first('content') }}</p>
+                                        @endif
                                     </fieldset>
                                 </div>
                                 <div class="col-lg-12">
                                     <fieldset>
-                                        <button type="submit" id="form-submit" class="filled-button">Gửi</button>
+                                        <button type="submit" id="form-submit" class="mt-2 filled-button">Gửi</button>
                                     </fieldset>
                                 </div>
                             </div>

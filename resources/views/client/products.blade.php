@@ -27,7 +27,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="col-md-12">
+                <div class="col-md-10 m-auto">
                     <div class="filters-content d-flex">
                         <div class="col-md-3 col-lg-3  p-0 text-white">
                             <div class="filters">
@@ -36,20 +36,22 @@
                                         placeholder="Tìm kiếm tên sản phẩm"> <button class="btn btn-primary">Tìm
                                         kiếm</button>
                                 </form>
-                                <h4 class="p-3 mb-2" style="background-color: #f33f3f;">Lọc theo danh mục</h4>
+                                <h4 class="mb-2 text-left" style="color: black; border-bottom: 2px solid grey; font-weight: bold;">Danh mục</h4>
                                 <ul>
-                                    <li class="active p-1 m-0 d-block text-center" data-filter="*">Tất cả sản phẩm</li>
+                                    <li class="active p-1 m-0 d-block text-left" data-filter="*">Tất cả sản phẩm</li>
                                     @foreach ($cate as $data)
-                                        <li class="d-block p-1 m-0 text-center " data-filter=".prd{{ $data->id }}">
+                                        <li class="d-block p-1 m-0 text-left " data-filter=".prd{{ $data->id }}">
                                             {{ $data->name }}</li>
                                     @endforeach
 
                                 </ul>
-                                <h4 class="p-3 my-2" style="background-color: #f33f3f;">Lọc theo kích cỡ</h4>
+                                <h4 class="my-2 text-left mt-3" style="color: black; border-bottom: 2px solid grey; font-weight: bold;">Kích cỡ</h4>
                                 <ul>
-                                    <li class="p-1 m-0 d-block text-center capitalize">Cỡ nhỏ</li>
-                                    <li class="p-1 m-0 d-block text-center capitalize">Cỡ vừa</li>
-                                    <li class="p-1 m-0 d-block text-center capitalize">Cỡ lớn</li>
+                                    @foreach ($sizes as $sz)
+                                        <li class="p-1 m-0 d-block text-left capitalize" data-filter=".size{{ $sz->id }}">{{ $sz->nameSize }}</li>
+                                    @endforeach
+                                    {{-- <li class="p-1 m-0 d-block text-left capitalize">Cỡ vừa</li>
+                                    <li class="p-1 m-0 d-block text-left capitalize">Cỡ lớn</li> --}}
                                 </ul>
 
                             </div>
@@ -57,7 +59,7 @@
                         <div class="col-md-9 col-lg-9">
                             <div class="row grid">
                                 @foreach ($products as $item)
-                                    <div class="col-lg-4 col-md-4 all prd{{ $item->category_id }}">
+                                    <div class="col-lg-4 col-md-4 all prd{{ $item->category_id }} size{{ $item->size_id }}">
                                         <div class="product-item">
                                             <a href="{{ route('page.product-detail', $item->id) }}"><img
                                                     src="{{ asset($item->avatar) }}" alt=""></a>
@@ -102,5 +104,4 @@
         background-color: rgb(255, 255, 255);
         border-bottom: 0.4px solid #f33f3f;
     }
-  
 </style>

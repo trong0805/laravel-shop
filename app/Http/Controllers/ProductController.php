@@ -113,6 +113,7 @@ class ProductController extends Controller
     public function showProduct()
     {
         $cate = CategoryProduct::all();
+        $sizes = Size::all();
         // $products = DB::table('products')->join('category_products', 'products.category_id', '=', 'category_products.id')
         // ->select('products.*', 'category_products.name')->Paginate(9);
         $products = Product::select('products.*', 'category_products.name', 'sizes.nameSize')
@@ -121,7 +122,7 @@ class ProductController extends Controller
             ->where('statusPrd', '=', 0)->where('statusCate', '=', 0)->search()->Paginate(5);
         
         // \dd($galleryImages);
-        return view('client.products', compact('products', 'cate'));
+        return view('client.products', compact('products', 'cate', 'sizes'));
     }
     public function updateStatus($product)
     {

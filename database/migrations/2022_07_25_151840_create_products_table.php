@@ -20,9 +20,9 @@ return new class extends Migration
             $table->string('description');
             $table->string('avatar');
             $table->unsignedBigInteger('category_id');
-            $table->foreign('category_id')->references('id')->on('category_products');
+            $table->foreign('category_id')->references('id')->on('category_products')->onDelete('cascade');;
             $table->unsignedBigInteger('size_id');
-            $table->foreign('size_id')->references('id')->on('sizes');
+            $table->foreign('size_id')->references('id')->on('sizes')->onDelete('cascade');;
             $table->integer('statusPrd');
             $table->timestamps();
         });

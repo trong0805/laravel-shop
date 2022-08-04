@@ -16,7 +16,9 @@ class CartController extends Controller
         $carts = DB::table('carts')->join('products', 'carts.productId', '=', 'products.id')->where('carts.userId', '=', Auth::user()->id)
             ->select('carts.*', 'products.nameProduct', 'products.avatar', 'products.category_id')->get();
         // dd($carts);
-        return view('client.carts', compact('carts', 'cate'));
+        // dd(count($carts));
+        $total = 0;
+        return view('client.carts', compact('carts', 'cate', 'total'));
     }
     public function storeCart(Request $request)
     {
@@ -61,4 +63,5 @@ class CartController extends Controller
         $cart->delete();
         return redirect()->route('page.carts.list');
     }
+
 }

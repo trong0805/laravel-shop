@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CategoryPostRequest extends FormRequest
+class PassRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,15 +24,7 @@ class CategoryPostRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required',
-            // 'statusPost' => 'required',
-        ];
-    }
-    public function messages()
-    {
-        return [
-        'name.required' => 'Tên danh mục không thể để trống!',
-        'statusPost.required' => 'Trạng thái không thể để trống!',
+            //
         ];
     }
 }

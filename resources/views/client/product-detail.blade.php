@@ -27,14 +27,17 @@
                 </div>
                 <div class="col-md-12 d-flex">
                     <div class="col-lg-7 col-md-7">
-                        <img width="100%" id="imgClick" class="border" src="{{ asset($dataProduct->avatar) }}" alt="">
+                        <img width="100%" id="imgClick" class="border" src="{{ asset($dataProduct->avatar) }}"
+                            alt="">
                         <div class="row-grid d-flex">
                             <div class="col-lg-3">
-                                <img width="100%" class="border" src="{{ asset($dataProduct->avatar) }}" onclick=" changeImage('{{asset($dataProduct->avatar)}}');" alt="">
+                                <img width="100%" class="border" src="{{ asset($dataProduct->avatar) }}"
+                                    onclick=" changeImage('{{ asset($dataProduct->avatar) }}');" alt="">
                             </div>
                             @foreach ($galleryImages as $img)
                                 <div class="col-lg-3">
-                                    <img width="100%" class="border" src="{{ asset($img->image_gallery) }}" onclick=" changeImage('{{asset($img->image_gallery)}}');" alt="">
+                                    <img width="100%" class="border" src="{{ asset($img->image_gallery) }}"
+                                        onclick=" changeImage('{{ asset($img->image_gallery) }}');" alt="">
                                 </div>
                             @endforeach
                         </div>
@@ -62,11 +65,14 @@
                                 <form action="{{ route('page.carts.storeCart') }}" method="post">
                                     @csrf
                                     <input type="hidden" name="productId" value="{{ $dataProduct->id }}">
-                                    <input type="hidden" name="userId" value="{{ Auth::user() ? Auth::user()->id : '' }}">
+                                    <input type="hidden" name="userId"
+                                        value="{{ Auth::user() ? Auth::user()->id : '' }}">
                                     <input type="hidden" name="price" value="{{ $dataProduct->price }}">
-                                    <input name="quantity" class="input-qty" max="10" min="1" type="number"
+                                    <input type="button" onclick="tru()" value="-" class="btn btn-primary">
+                                    <input name="quantity"style="width: 50px;" class="input-qty btn btn-default" id="quantity" min="1" type="text"
                                         value="1">
-                                    <button type="submit" class="btn btn-danger">Thêm vào giỏ hàng</button>
+                                    <input type="button" onclick="cong()" value="+" class="btn btn-primary"> <br>
+                                    <button type="submit" class="btn btn-danger mt-2">Thêm vào giỏ hàng</button>
                                 </form>
                                 <ul class="stars">
                                     <li><i class="fa fa-star"></i></li>
@@ -74,18 +80,18 @@
                                     <li><i class="fa fa-star"></i></li>
                                     <li><i class="fa fa-star"></i></li>
                                     <li><i class="fa fa-star"></i></li>
-                                </ul>   
+                                </ul>
                             </div>
-                             <div class="col-md-12">
-                                    <div class="left-content">
-                                        <ul class="social-icons">
-                                            <li><a href="#" style="padding: 16px;"><i class="fa fa-facebook"></i></a></li>
-                                            <li><a href="#" style="padding: 16px;"><i class="fa fa-twitter"></i></a></li>
-                                            <li><a href="#" style="padding: 16px;"><i class="fa fa-linkedin"></i></a></li>
-                                            <li><a href="#" style="padding: 16px;"><i class="fa fa-behance"></i></a></li>
-                                        </ul>
-                                    </div>
+                            <div class="col-md-12">
+                                <div class="left-content">
+                                    <ul class="social-icons">
+                                        <li><a href="#" style="padding: 16px;"><i class="fa fa-facebook"></i></a></li>
+                                        <li><a href="#" style="padding: 16px;"><i class="fa fa-twitter"></i></a></li>
+                                        <li><a href="#" style="padding: 16px;"><i class="fa fa-linkedin"></i></a></li>
+                                        <li><a href="#" style="padding: 16px;"><i class="fa fa-behance"></i></a></li>
+                                    </ul>
                                 </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -133,7 +139,8 @@
                             <div class="form-group d-flex">
                                 <input type="hidden" value="{{ $dataProduct->id }}" name="product_id"
                                     class="form-control mr-2" placeholder="id sản phẩm">
-                                <input type="text" name="content" class="form-control mr-2" placeholder="Viết bình luận">
+                                <input type="text" name="content" class="form-control mr-2"
+                                    placeholder="Viết bình luận">
                                 <button type="submit" class="btn btn-primary">Bình luận</button>
                             </div>
                         </form>
@@ -167,7 +174,7 @@
                                                 <li><i class="fa fa-star"></i></li>
                                                 <li><i class="fa fa-star"></i></li>
                                             </ul>
-                                            
+
                                             {{-- <span>Reviews (72)</span> --}}
                                         </div>
                                     </div>
@@ -182,7 +189,17 @@
 @endsection()
 <script type="text/javascript">
     function changeImage(a) {
-        console.log(document.getElementById("imgClick").src="a");
-        document.getElementById("imgClick").src=a;
+        console.log(document.getElementById("imgClick").src = "a");
+        document.getElementById("imgClick").src = a;
+    }
+    function cong() {
+        var val = document.getElementById("quantity").value;
+        document.getElementById("quantity").value = parseInt(val)+1;
+    }
+    function tru() {
+        var val = document.getElementById("quantity").value;
+        if(parseInt(val) > 1) {
+            document.getElementById("quantity").value = parseInt(val)-1;
+        }
     }
 </script>

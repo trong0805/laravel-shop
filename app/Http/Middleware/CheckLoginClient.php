@@ -22,8 +22,10 @@ class CheckLoginClient
             // nếu role = 0 (admin), status =  0 (actived) thì cho qua.
             if ($user->status == 0) {
                 return $next($request);
-            } else {
+            }
+             else {
                 Auth::logout();
+                session()->flash('error', 'Tài khoản của bạn chưa được kích hoạt!');
                 return redirect()->route('auth.login');
             }
         } else {

@@ -37,8 +37,12 @@ class AuthController extends Controller
             if ($auth->role === 0) {
                 return redirect()->route('admin.users.list');
             } elseif ($auth->role === 1 && $auth->status === 0) {
-                // return redirect()->route('auth.home');
-                return redirect(session('link'));
+                // dd(session('link'));
+                if(session('link') == "http://127.0.0.1:8000/auth/login" || session('link') == "http://127.0.0.1:8000" || session('link') == null){
+                    return redirect()->route('page.home');
+                }else {
+                    return redirect(session('link'));
+                }
             } else {
                 session()->flash('error', 'Tài khoản của bạn chưa được kích hoạt!');
                 return redirect()->route('auth.login');

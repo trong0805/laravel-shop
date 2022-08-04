@@ -8,19 +8,23 @@ use App\Http\Controllers\CommentController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\OrderDetailController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SizeController;
+use App\Models\OrderDetail;
 use App\Models\Product;
+
 Route::get('/', function () {
     return view('welcome');
 });
-Route::prefix('auth')->name('auth.')->group(function () {
+Route::middleware('guest')->prefix('auth')->name('auth.')->group(function () {
     Route::get('/login', [AuthController::class, 'login'])->name('login');
     Route::post('/postLogin', [AuthController::class, 'postLogin'])->name('postLogin');
     Route::get('/register', [AuthController::class, 'register'])->name('register');
     Route::post('/register_store', [AuthController::class, 'register_store'])->name('register_store');
-    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 });
+Route::middleware('auth')->get('/auth/logout', [AuthController::class, 'logout'])->name('auth.logout');
 // ============PHẦN GIAO DIỆN==================
 Route::prefix('page')->name('page.')->group(function () {
     //trang chủ
@@ -52,6 +56,17 @@ Route::prefix('page')->name('page.')->group(function () {
         Route::post('/storeCart', [CartController::class, 'storeCart'])->name('storeCart');
         Route::post('/update/{cart}', [CartController::class, 'update'])->name('update');
         Route::delete('/delete/{cart}', [CartController::class, 'delete'])->name('delete');
+    });
+    Route::prefix('orders')->middleware('CheckAdminClient')->name('orders.')->group(function () {
+        Route::post('/storeOrder', [OrderController::class, 'storeOrder'])->name('order');
+        Route::get('/showBill', [OrderController::class, 'showBill'])->name('bill');
+        Route::get('/bill-detail/{order}', [OrderDetailController::class, 'billDetail'])->name('billDetail');
+        Route::put('/update/{order}', [OrderController::class, 'updateStatusClient'])->name('updateStatusClient');
+    });
+    Route::prefix('account')->name('accounts.')->group(function () {
+        Route::get('/{user}', [UserController::class, 'account'])->name('account');
+        Route::post('updateAccount/{user}', [UserController::class, 'updateAccount'])->name('updateAccount');
+        Route::post('updatePass/{user}', [UserController::class, 'updatePass'])->name('updatePass');
     });
 });
 // ============================PHẦN ADMIN=============================
@@ -121,5 +136,10 @@ Route::prefix('admin')->middleware('CheckAdminLogin')->name('admin.')->group(fun
     Route::prefix('comments')->name('comments.')->group(function () {
         Route::get('/', [CommentController::class, 'index'])->name('list');
         Route::delete('/delete/{comment}', [CommentController::class, 'delete'])->name('delete');
+    });
+    Route::prefix('orders')->name('orders.')->group(function () {
+        Route::get('/', [OrderController::class, 'index'])->name('list');
+        Route::get('/detail/{order}', [OrderDetailController::class, 'index'])->name('detail');
+        Route::put('/update/{order}', [OrderController::class, 'updateStatus'])->name('updateStatus');
     });
 });
