@@ -60,7 +60,12 @@
                                 @endforeach
                                 <p style="font-size: 26px; color: rgb(255, 85, 85);"> Giá:
                                     {{ number_format($dataProduct->price) }}<sup>đ</sup></p>
-                                <p> {{ $dataProduct->description }}</p>
+                                <p id="myContent" class="text-capitalize nameContent my-1"> {{ $dataProduct->description }}
+                                    {{-- <a onclick="myFunction()" id="buttonShow" style="color: blue; cursor: pointer;">ẩn</a> --}}
+                                </p>
+                                <div class="m-auto text-center">
+                                    <a onclick="myFunction()" id="buttonShow" style="color: blue; cursor: pointer;">Hiển thị</a>
+                                </div>
                                 {{-- thêm vào giỏ --}}
                                 <form action="{{ route('page.carts.storeCart') }}" method="post">
                                     @csrf
@@ -69,8 +74,8 @@
                                         value="{{ Auth::user() ? Auth::user()->id : '' }}">
                                     <input type="hidden" name="price" value="{{ $dataProduct->price }}">
                                     <input type="button" onclick="tru()" value="-" class="btn btn-primary">
-                                    <input name="quantity"style="width: 50px;" class="input-qty btn btn-default" id="quantity" min="1" type="text"
-                                        value="1">
+                                    <input name="quantity"style="width: 50px;" class="input-qty btn btn-default"
+                                        id="quantity" min="1" type="text" value="1">
                                     <input type="button" onclick="cong()" value="+" class="btn btn-primary"> <br>
                                     <button type="submit" class="btn btn-danger mt-2">Thêm vào giỏ hàng</button>
                                 </form>
@@ -162,21 +167,13 @@
                                                 <h5 class="text-capitalize nameCut hoverne">{{ $item->nameProduct }}</h5>
                                             </a>
                                             <p class="text-capitalize nameContent my-1">{{ $item->description }}</p>
+
                                             <p class="m-0">Giá : {{ number_format($item->price) }} <sup>đ</sup></p>
-                                            <div class="d-flex justify-content-between">
+                                            <div class="">
                                                 <p class="my-0">Loại : {{ $item->name }}</p>
                                                 <p class="my-0">Kích cỡ : {{ $item->nameSize }}
                                             </div>
                                             </p>
-                                            {{-- <ul class="stars">
-                                                <li><i class="fa fa-star"></i></li>
-                                                <li><i class="fa fa-star"></i></li>
-                                                <li><i class="fa fa-star"></i></li>
-                                                <li><i class="fa fa-star"></i></li>
-                                                <li><i class="fa fa-star"></i></li>
-                                            </ul> --}}
-
-                                            {{-- <span>Reviews (72)</span> --}}
                                         </div>
                                     </div>
                                 </div>
@@ -193,15 +190,23 @@
         console.log(document.getElementById("imgClick").src = "a");
         document.getElementById("imgClick").src = a;
     }
+
     function cong() {
         var val = document.getElementById("quantity").value;
-        document.getElementById("quantity").value = parseInt(val)+1;
+        document.getElementById("quantity").value = parseInt(val) + 1;
     }
+
     function tru() {
         var val = document.getElementById("quantity").value;
-        if(parseInt(val) > 1) {
-            document.getElementById("quantity").value = parseInt(val)-1;
+        if (parseInt(val) > 1) {
+            document.getElementById("quantity").value = parseInt(val) - 1;
         }
+    }
+
+    function myFunction() {
+        var element = document.getElementById("myContent");
+        element.classList.remove("nameContent");
+        document.getElementById('buttonShow').style.display = 'none';
     }
 </script>
 <style>

@@ -35,25 +35,24 @@
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                 data-accordion="false">
-                <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
-               <li class="nav-item">
-                <a href="#" class="nav-link">
-                    <i class="nav-icon fas fa-chart-line"></i>
-                    <p>
-                        Dashboard
-                        <i class="right fas fa-angle-left"></i>
-                    </p>
-                </a>
-                <ul class="nav nav-treeview">
-                    <li class="nav-item">
-                        <a href="{{ route('admin.dashboard') }}" class="nav-link">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>Thống kê</p>
-                        </a>
-                    </li>
-                </ul>
-            </li>
+                {{-- thống kê --}}
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-chart-line"></i>
+                        <p>
+                            Dashboard
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('admin.dashboard') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Thống kê</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
                 {{-- người dùng v --}}
                 <li class="nav-item">
                     <a href="#" class="nav-link">
@@ -198,6 +197,19 @@
                         <i class="nav-icon fas fa-money-bill"></i>
                         <p>
                             Hóa đơn
+                            {{-- <span class="thongbao"> --}}
+                            <?php
+                            $data = DB::table('orders')
+                                ->where('orders.orderstatus', '=', 0)
+                                ->get();
+                            // dd(count($carts));
+                            // echo count($data);
+                            if (count($data) == 0) {
+                            } else {
+                                echo ' <span class="thongbao">' . count($data) . '</span>';
+                            }
+                            ?>
+                            {{-- </span> --}}
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
@@ -215,6 +227,15 @@
                         <i class="nav-icon fas fa-book-reader"></i>
                         <p>
                             Phản hồi
+                            <?php
+                            $data = DB::table('contacts')
+                                ->where('contacts.action', '=', 0)
+                                ->get();
+                            if (count($data) == 0) {
+                            } else {
+                                echo ' <span class="thongbao">' . count($data) . '</span>';
+                            }
+                            ?>
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
@@ -227,6 +248,7 @@
                         </li>
                     </ul>
                 </li>
+                {{-- bình luận --}}
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-reply-all"></i>
@@ -268,3 +290,14 @@
     </div>
     <!-- /.sidebar -->
 </aside>
+<style>
+    span.thongbao {
+        background-color: white;
+        color: red;
+        display: inline-block;
+        width: 24px;
+        font-weight: 800;
+        text-align: center;
+        border-radius: 50%;
+    }
+</style>

@@ -61,12 +61,13 @@ class UserController extends Controller
         $updateAcc->name = $request->name;
         $updateAcc->username = $request->username;
         $updateAcc->email = $request->email;
-        $updateAcc->name = $request->name;
         if ($request->hasFile('avatar')) {
             $avatar = $request->avatar;
             $avatarName = $avatar->hashName();
             $avatarName = $request->$request->name . '_' . $avatarName;
             $updateAcc->avatar = $avatar->storeAs('images/users', $avatarName);
+        }else {
+            $updateAcc->avatar = $updateAcc->avatar;
         }
         $updateAcc->save();
         session()->flash('success', 'Bạn đã cập nhật thông tin thành công!');

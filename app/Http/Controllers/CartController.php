@@ -7,7 +7,7 @@ use App\Models\CategoryProduct;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-
+// session_start();
 class CartController extends Controller
 {
     public function index()
@@ -16,7 +16,6 @@ class CartController extends Controller
         $carts = DB::table('carts')->join('products', 'carts.productId', '=', 'products.id')->where('carts.userId', '=', Auth::user()->id)
             ->select('carts.*', 'products.nameProduct', 'products.avatar', 'products.category_id')->get();
         // dd($carts);
-        // dd(count($carts));
         $total = 0;
         return view('client.carts', compact('carts', 'cate', 'total'));
     }

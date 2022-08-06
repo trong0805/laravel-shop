@@ -26,9 +26,21 @@
             </div>
             <div class="">
                 <a class="navbar-brand float-right" onclick="show()" id="menuClicks">
-                    <h2 class="position-relative"><i class="fas fa-list-ul"></i> 
-                        <p class="position-absolute text-center font-weight-bold" style=" background: white; border: 1px solid grey; color: red; top: -8px; right: -12px; width: 24px; height: 24px; border-radius: 50%;">
-                            3
+                    <h2 class="position-relative"><i class="fas fa-list-ul"></i>
+                        <p class="position-absolute text-center font-weight-bold"
+                            style=" background: white; border: 1px solid grey; color: red; top: -8px; right: -12px; width: 24px; height: 24px; border-radius: 50%;">
+                            @if (Auth::user())
+                                <?php
+                                $carts = DB::table('carts')
+                                    ->where('carts.userId', '=', Auth::user()->id)
+                                    ->get();
+                                // dd(count($carts));
+                                echo count($carts);
+                                ?>
+                            @else
+                                0
+                            @endif
+
                         </p>
                     </h2>
                 </a>
@@ -52,8 +64,8 @@
                 <h4>{{ Auth::user()->name }}</h4>
             </li>
             <li class="nav-item text-center hoverNav">
-                <a class="nav-link" href="{{ route('page.carts.list') }}">Giỏ hàng <i
-                        class="fa fa-cart-arrow-down"></i></a>
+                <a class="nav-link" href="{{ route('page.carts.list') }}">Giỏ hàng <i class="fa fa-cart-arrow-down"></i>
+                    <span class="showCart"><?php echo count($carts); ?></span></a>
             </li>
             <li class="nav-item text-center hoverNav">
                 <a class="nav-link" href="{{ route('page.orders.bill') }}">Hóa đơn <i
@@ -133,6 +145,13 @@
     .overlay {
         cursor: pointer;
     }
+
+    .showCart {
+        display: inline-block;
+        background: red;
+        border-radius: 50%;
+        width: 24px
+    }
 </style>
 <script>
     function show() {
@@ -147,10 +166,10 @@
         document.querySelector('.overlay').style.display = 'none';
     }
 </script>
-<?php 
-    // function carts() {
-    //     $numberCarts = DB::table('carts')>where('carts.userId', '=', Auth::user()->id)->get();
-    //     // dd($carts);
-    //     return count($numberCarts);
-    // }
+<?php
+// function carts() {
+//     $numberCarts = DB::table('carts')>where('carts.userId', '=', Auth::user()->id)->get();
+//     // dd($carts);
+//     return count($numberCarts);
+// }
 ?>

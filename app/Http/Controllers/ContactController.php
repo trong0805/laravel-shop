@@ -10,7 +10,7 @@ class ContactController extends Controller
 {
     public function index() {
         // hiển thị ra ở trang admin
-        $contacts = Contact::select('id', 'name', 'email', 'title', 'content')->Paginate(5);
+        $contacts = Contact::select('id', 'name', 'email', 'title', 'content', 'action')->Paginate(5);
         return view('admin.contacts.list', compact('contacts'));
     }
     public function delete($contact) {
@@ -26,7 +26,7 @@ class ContactController extends Controller
     public function updateAction($contact)
     {
         $data = Contact::find($contact);
-        if ($data->action == 0) {
+        if ($data->action === 0) {
             $data->action = 1;
         } else {
             $data->action = 0;

@@ -30,9 +30,9 @@
                                 @csrf
                                 
                                 @if ($item->statusPost === 1)
-                                    <i class="fab fa-circle alert-danger"></i> Ẩn <button type="submit"  style="background: transparent; border: transparent"><i class="fa fa-redo"></i></button>
+                                    <i class="fab fa-circle rounded-circle alert-danger"></i> Ẩn <button type="submit"  style="background: transparent; border: transparent"><i class="fa fa-redo"></i></button>
                                 @else
-                                    <i class="fab fa-circle alert-success"></i> Hiện thị <button type="submit" style="background: transparent; border: transparent"><i class="fa fa-redo"></i></button>
+                                    <i class="fab fa-circle rounded-circle alert-success"></i> Hiện thị <button type="submit" style="background: transparent; border: transparent"><i class="fa fa-redo"></i></button>
                                 @endif
                             </form>
                         </a>

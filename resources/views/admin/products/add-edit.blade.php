@@ -42,7 +42,7 @@
         </div>
         <div class="form-outline mb-4">
             <label class="form-label">Mô tả sản phẩm</label>
-            <textarea type="text" name="description" placeholder="Mô tả sản phẩm" rows="5" class="form-control">
+            <textarea type="text" name="description" rows="5" class="form-control">
                 {{ isset($data) ? $data->description : old('description') }}
             </textarea>
             @if ($errors->has('description'))

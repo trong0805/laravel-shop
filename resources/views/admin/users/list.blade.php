@@ -36,9 +36,9 @@
                                 @csrf
                                 
                                 @if ($item->status === 1)
-                                    <i class="fab fa-circle alert-danger"></i> Không kích hoạt <button type="submit"  style="background: transparent; border: transparent"><i class="fa fa-redo"></i></button>
+                                    <i class="fab fa-circle rounded-circle alert-danger"></i> Không kích hoạt <button type="submit"  style="background: transparent; border: transparent"><i class="fa fa-redo"></i></button>
                                 @else
-                                    <i class="fab fa-circle alert-success"></i> Kích hoạt <button type="submit" style="background: transparent; border: transparent"><i class="fa fa-redo"></i></button>
+                                    <i class="fab fa-circle rounded-circle alert-success"></i> Kích hoạt <button type="submit" style="background: transparent; border: transparent"><i class="fa fa-redo"></i></button>
                                 @endif
                             </form>
                         </a>

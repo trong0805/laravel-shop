@@ -7,8 +7,15 @@
         </div>
     @endif
     <table class="table table-bordered">
+
         <div class="alert alert-default-info">
             <h3 class="text-center">Danh sách sản phẩm</h3>
+        </div>
+        <div class="d-inline-flex">
+            <form action="" class="form-group d-block">
+                <input type="text" class="form-control mr-1 d-inline-block"  name="search" placeholder="Tìm kiếm tên sản phẩm">
+                <button class="btn btn-primary w-50">Tìm kiếm</button>
+            </form>
         </div>
         <a href="{{ route('admin.products.create') }}" class="btn btn-primary mb-1 float-right">Thêm mới</a>
         <thead>
@@ -30,18 +37,22 @@
                     <td>{{ $item->id }}</td>
                     <td>{{ $item->nameProduct }}</td>
                     <td><img src="{{ asset($item->avatar) }}" width="100px" alt=""></td>
-                    <td>{{ $item->price }}</td>
+                    <td>{{ number_format($item->price) }}<sup>đ</sup></td>
                     <td>{{ $item->nameSize }}</td>
                     <td><a onclick="return confirm('Bạn có muốn thay đổi trạng thái danh mục {{ $item->name }}!')">
-                        <form action="{{ route('admin.products.updateStatus', $item->id) }}" method="post">
-                            @csrf
-                            @if ($item->statusPrd === 1)
-                                <i class="fab fa-circle alert-danger"></i> Ẩn <button type="submit"  style="background: transparent; border: transparent"><i class="fa fa-redo"></i></button>
-                            @else
-                                <i class="fab fa-circle alert-success"></i> Hiện thị <button type="submit" style="background: transparent; border: transparent"><i class="fa fa-redo"></i></button>
-                            @endif
-                        </form>
-                    </a></td>
+                            <form action="{{ route('admin.products.updateStatus', $item->id) }}" method="post">
+                                @csrf
+                                @if ($item->statusPrd === 1)
+                                    <i class="fab fa-circle rounded-circle alert-danger"></i> Ẩn <button type="submit"
+                                        style="background: transparent; border: transparent"><i
+                                            class="fa fa-redo"></i></button>
+                                @else
+                                    <i class="fab fa-circle rounded-circle alert-success"></i> Hiện thị <button
+                                        type="submit" style="background: transparent; border: transparent"><i
+                                            class="fa fa-redo"></i></button>
+                                @endif
+                            </form>
+                        </a></td>
                     {{-- <td>{{ $item->description }}</td> --}}
                     <td>{{ $item->name }}</td>
                     <td style="display: flex;">

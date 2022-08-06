@@ -1,69 +1,16 @@
-<span class="star-rating">
-    <input type="radio" name="rating" value="1"><i></i>
-    <input type="radio" name="rating" value="2"><i></i>
-    <input type="radio" name="rating" value="3"><i></i>
-    <input type="radio" name="rating" value="4"><i></i>
-    <input type="radio" name="rating" value="5"><i></i>
-</span>
-<style>
-    .star-rating {
-        font-size: 0;
-        white-space: nowrap;
-        display: inline-block;
-        width: 100px;
-        height: 20px;
-        overflow: hidden;
-        position: relative;
-        background: url('data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IiB3aWR0aD0iMjBweCIgaGVpZ2h0PSIyMHB4IiB2aWV3Qm94PSIwIDAgMjAgMjAiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDIwIDIwIiB4bWw6c3BhY2U9InByZXNlcnZlIj48cG9seWdvbiBmaWxsPSIjREREREREIiBwb2ludHM9IjEwLDAgMTMuMDksNi41ODMgMjAsNy42MzkgMTUsMTIuNzY0IDE2LjE4LDIwIDEwLDE2LjU4MyAzLjgyLDIwIDUsMTIuNzY0IDAsNy42MzkgNi45MSw2LjU4MyAiLz48L3N2Zz4=');
-  background-size: contain;
-}
-.star-rating i {
-  opacity: 0;
-  position: absolute;
-  left: 0;
-  top: 0;
-  height: 100%;
-  width: 20%;
-  z-index: 1;
-  background:     url('data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IiB3aWR0aD0iMjBweCIgaGVpZ2h0PSIyMHB4IiB2aWV3Qm94PSIwIDAgMjAgMjAiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDIwIDIwIiB4bWw6c3BhY2U9InByZXNlcnZlIj48cG9seWdvbiBmaWxsPSIjRkZERjg4IiBwb2ludHM9IjEwLDAgMTMuMDksNi41ODMgMjAsNy42MzkgMTUsMTIuNzY0IDE2LjE4LDIwIDEwLDE2LjU4MyAzLjgyLDIwIDUsMTIuNzY0IDAsNy42MzkgNi45MSw2LjU4MyAiLz48L3N2Zz4=');
-        background-size: contain;
+@extends('layout.master-client')
+@section('title', 'Sản phẩm')
+@section('content')
+<script>
+    function myFunction() {
+        var element = document.getElementById("myDIV");
+        element.classList.remove("nameContent");
+        document.getElementById('ok').style.display = 'none';
     }
-
-    .star-rating input {
-        -moz-appearance: none;
-        -webkit-appearance: none;
-        opacity: 0;
-        display: inline-block;
-        width: 20%;
-        height: 100%;
-        margin: 0;
-        padding: 0;
-        z-index: 2;
-        position: relative;
-    }
-
-    .star-rating input:hover+i,
-    .star-rating input:checked+i {
-        opacity: 1;
-    }
-
-    .star-rating i {
-        width: 20%;
-    }
-
-    .star-rating i~i {
-        width: 40%;
-    }
-
-    .star-rating i~i~i {
-        width: 60%;
-    }
-
-    .star-rating i~i~i~i {
-        width: 80%;
-    }
-
-    .star-rating i~i~i~i~i {
-        width: 100%;
-    }
-</style>
+</script>
+<div style="width: 100%; height: 300px;"></div>
+<div style="Width: 200px;">
+    <p id="myDIV" class="text-capitalize nameContent my-1">Bàn nước Bridge được thiết kế độc đáo với chất liệu hoàn toàn là gỗ sồi đặc. Kết cấu vững chắc và được kết nối thành một khối hình trọn vẹn, khéo léo mà không cần đến phụ kiện nào. Từng đường nét được xử lý tinh xảo kết hợp với màu sắc tự nhiên của gỗ sồi mang đến vẻ đẹp mộc mạc, gần gũi cho không gian phòng khách. Bridge – Tình yêu thiên nhiên và sức quyến rũ của gỗ. Bộ sưu tập Bridge mang hơi thở Scandinavian là sự kết hợp hoàn hảo của nhà thiết kế nổi tiếng Đan Mạch Hans Sandgren Jakobsen cùng công nghệ sản xuất thủ công của Nhật Bản. Mang thiết kế vượt thời gian, sử dụng chất liệu gỗ sồi và da bò tự nhiên, Bridge mang đến cảm giác sang trọng, gần gũi và thoải mái cho gia chủ. Điểm nổi bật của Bridge là sự tinh xảo trong hoàn thiện, từng chi tiết, những đường cong, bề mặt gỗ sồi được thực hiện và chọn lựa vô cùng kỹ càng, để tạo ra một Bridge hoàn hảo, chạm đến tâm hồn đầy cảm xúc và yêu quý những giá trị lâu bền của gia chủ Việt.</p>
+    <a id="ok" onclick="myFunction()">Hiển thị</a>
+</div>
+@endsection

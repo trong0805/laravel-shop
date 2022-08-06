@@ -77,7 +77,7 @@
                                                 </a>
                                                 <p class="text-capitalize nameContent my-1">{{ $item->description }}</p>
                                                 <p class="m-0">Giá : {{ number_format($item->price) }} <sup>đ</sup></p>
-                                                <div class="d-flex justify-content-between">
+                                                <div class="">
                                                     <p class="my-0">Loại : {{ $item->name }}</p>
                                                     <p class="my-0">Kích cỡ : {{ $item->nameSize }}
                                                 </div>
@@ -91,7 +91,7 @@
                 </div>
                 <div class="col-md-12">
                     <div class="d-flex justify-content-center">
-                        <div>{{ $products->links() }}</div>
+                        {{-- <div>{{ $products->links() }}</div> --}}
                     </div>
                 </div>
             </div>

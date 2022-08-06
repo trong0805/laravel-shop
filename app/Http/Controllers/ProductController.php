@@ -15,9 +15,12 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $products = DB::table('products')->join('category_products', 'products.category_id', '=', 'category_products.id')
+        $products = Product::join('category_products', 'products.category_id', '=', 'category_products.id')
             ->join('sizes', 'products.size_id', '=', 'sizes.id')->where('statusCate', '=', 0)
-            ->select('products.*', 'category_products.name', 'sizes.nameSize')->orderBy('products.id', 'ASC')->Paginate(6);
+            ->select('products.*', 'category_products.name', 'sizes.nameSize')->orderBy('products.id', 'ASC')
+            ->search()
+            ->Paginate(6);
+        // dd($products);
         return view('admin.products.list', compact('products'));
     }
     public function create()
@@ -119,7 +122,7 @@ class ProductController extends Controller
         $products = Product::select('products.*', 'category_products.name', 'sizes.nameSize')
             ->join('category_products', 'products.category_id', '=', 'category_products.id')
             ->join('sizes', 'products.size_id', '=', 'sizes.id')
-            ->where('statusPrd', '=', 0)->where('statusCate', '=', 0)->search()->Paginate(5);
+            ->where('statusPrd', '=', 0)->where('statusCate', '=', 0)->search()->get();
         
         // \dd($galleryImages);
         return view('client.products', compact('products', 'cate', 'sizes'));

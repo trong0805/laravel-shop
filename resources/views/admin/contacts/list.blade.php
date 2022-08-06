@@ -24,16 +24,22 @@
                     <td>{{ $item->email }}</td>
                     <td>{{ $item->title }}</td>
                     <td>{{ $item->content }}</td>
-                    <td><a onclick="return confirm('Bạn có muốn thay đổi trạng thái!')">
-                        <form action="{{ route('admin.contacts.updateAction', $item->id) }}" method="post">
-                            @csrf
-                            @if ($item->action == 0)
-                                <i class="fab fa-circle alert-success"></i> Hiện thị <button type="submit" style="background: transparent; border: transparent"><i class="fa fa-redo"></i></button>
-                            @else
-                                <i class="fab fa-circle alert-danger"></i> Ẩn <button type="submit"  style="background: transparent; border: transparent"><i class="fa fa-redo"></i></button>
-                            @endif
-                        </form>
-                    </a></td>
+                    <td>
+                        @if ($item->action == 0)
+                            <form action="{{ route('admin.contacts.updateAction', $item->id) }}" method="post">
+                                @csrf
+                                <select name="action" id="">
+                                    <option value="{{ $item->action }}" {{ $item->action == 0 ? 'selected' : '' }}>Chưa phản
+                                        hồi</option>
+                                    <option value="{{ $item->action }}" {{ $item->action == 1 ? 'selected' : '' }}>Đã phản
+                                        hồi</option>
+                                </select>
+                                <button type="submit">ok</button>
+                            </form>
+                        @else
+                            <i class="fab fa-circle  rounded-circle alert-success"></i> Đã phản hồi
+                        @endif
+                    </td>
                     <td>
                         <a onclick="return confirm('Bạn có chắc chắn muốn xóa')">
                             <form action="{{ route('admin.contacts.delete', $item->id) }}" method="post">
