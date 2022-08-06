@@ -96,14 +96,13 @@
                         <div class="content">
                             {{-- @if ($errors->any()) --}}
                             <form class="d-flex" action="{{ route('page.accounts.updateAccount', $dataUser->id) }}"
-                                method="POST">
+                                method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="col-lg-5">
                                     <img src="{{ asset($dataUser->avatar) }}" width="300px" alt="">
                                     <div class="form-group">
                                         <label for="exampleInputPassword1">Ảnh</label>
-                                        <input type="file" class="form-control" name="avatar" id="exampleInputPassword1"
-                                            placeholder="Password">
+                                        <input type="file" class="form-control" name="avatar" id="exampleInputPassword1">
                                     </div>
                                 </div>
                                 <div class="col-lg-7 m-auto">

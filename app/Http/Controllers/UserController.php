@@ -64,8 +64,9 @@ class UserController extends Controller
         if ($request->hasFile('avatar')) {
             $avatar = $request->avatar;
             $avatarName = $avatar->hashName();
-            $avatarName = $request->$request->name . '_' . $avatarName;
+            $avatarName = 'avatar' . '_' . $avatarName;
             $updateAcc->avatar = $avatar->storeAs('images/users', $avatarName);
+            // \dd($updateAcc->avatar);
         }else {
             $updateAcc->avatar = $updateAcc->avatar;
         }
