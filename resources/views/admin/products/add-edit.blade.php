@@ -42,8 +42,9 @@
         </div>
         <div class="form-outline mb-4">
             <label class="form-label">Mô tả sản phẩm</label>
-            <input type="text" name="description" placeholder="Mô tả sản phẩm" class="form-control"
-                value="{{ isset($data) ? $data->description : old('description') }}" />
+            <textarea type="text" name="description" placeholder="Mô tả sản phẩm" rows="5" class="form-control">
+                {{ isset($data) ? $data->description : old('description') }}
+            </textarea>
             @if ($errors->has('description'))
                 <p class="text-danger">{{ $errors->first('description') }}</p>
             @endif

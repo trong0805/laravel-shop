@@ -8,6 +8,7 @@ use App\Http\Controllers\CommentController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\DasboardController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\OrderDetailController;
 use App\Http\Controllers\ProductController;
@@ -28,9 +29,7 @@ Route::middleware('auth')->get('/auth/logout', [AuthController::class, 'logout']
 // ============PHẦN GIAO DIỆN==================
 Route::prefix('page')->name('page.')->group(function () {
     //trang chủ
-    Route::get('/', function () {
-        return view('client.index');
-    })->name('home');
+    Route::get('/', [ProductController::class, 'showIndex'])->name('home');
 
     //trang sản phẩm
     Route::get('/products', [ProductController::class, 'showProduct'])->name('products');
@@ -71,10 +70,8 @@ Route::prefix('page')->name('page.')->group(function () {
 });
 // ============================PHẦN ADMIN=============================
 Route::prefix('admin')->middleware('CheckAdminLogin')->name('admin.')->group(function () {
-    Route::get('/', function () {
-        return 'dashboard';
-    })->name('dashboard');
-
+    //thống kê 
+    Route::get('/', [DasboardController::class, 'index'])->name('dashboard');
     //tài khoản
     Route::prefix('users')->name('users.')->group(function () {
         Route::get('/', [UserController::class, 'index'])->name('list');

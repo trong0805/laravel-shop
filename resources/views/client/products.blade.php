@@ -36,7 +36,8 @@
                                         placeholder="Tìm kiếm tên sản phẩm"> <button class="btn btn-primary">Tìm
                                         kiếm</button>
                                 </form>
-                                <h4 class="mb-2 text-left" style="color: black; border-bottom: 2px solid grey; font-weight: bold;">Danh mục</h4>
+                                <h4 class="mb-2 text-left"
+                                    style="color: black; border-bottom: 2px solid grey; font-weight: bold;">Danh mục</h4>
                                 <ul>
                                     <li class="active p-1 m-0 d-block text-left" data-filter="*">Tất cả sản phẩm</li>
                                     @foreach ($cate as $data)
@@ -45,10 +46,12 @@
                                     @endforeach
 
                                 </ul>
-                                <h4 class="my-2 text-left mt-3" style="color: black; border-bottom: 2px solid grey; font-weight: bold;">Kích cỡ</h4>
+                                <h4 class="my-2 text-left mt-3"
+                                    style="color: black; border-bottom: 2px solid grey; font-weight: bold;">Kích cỡ</h4>
                                 <ul>
                                     @foreach ($sizes as $sz)
-                                        <li class="p-1 m-0 d-block text-left capitalize" data-filter=".size{{ $sz->id }}">{{ $sz->nameSize }}</li>
+                                        <li class="p-1 m-0 d-block text-left capitalize"
+                                            data-filter=".size{{ $sz->id }}">{{ $sz->nameSize }}</li>
                                     @endforeach
                                     {{-- <li class="p-1 m-0 d-block text-left capitalize">Cỡ vừa</li>
                                     <li class="p-1 m-0 d-block text-left capitalize">Cỡ lớn</li> --}}
@@ -62,25 +65,22 @@
                                     <div class="col-lg-4 col-md-4 all prd{{ $item->category_id }} size{{ $item->size_id }}">
                                         <div class="product-item">
                                             <a href="{{ route('page.product-detail', $item->id) }}"><img
-                                                    src="{{ asset($item->avatar) }}" alt=""></a>
+                                                    src="{{ asset($item->avatar) }}" alt="">
+                                            </a>
+                                            <div class="hoverImg">
+                                                <div class="ok"></div>
+                                            </div>
                                             <div class="down-content">
-                                                <a href="{{ route('page.product-detail', $item->id) }}" class="d-block">
+                                                <a href="{{ route('page.product-detail', $item->id) }}"
+                                                    class="d-block hoverne">
                                                     <h5 class="text-capitalize nameCut">{{ $item->nameProduct }}</h5>
                                                 </a>
+                                                <p class="text-capitalize nameContent my-1">{{ $item->description }}</p>
                                                 <p class="m-0">Giá : {{ number_format($item->price) }} <sup>đ</sup></p>
                                                 <div class="d-flex justify-content-between">
                                                     <p class="my-0">Loại : {{ $item->name }}</p>
                                                     <p class="my-0">Kích cỡ : {{ $item->nameSize }}
                                                 </div>
-                                                </p>
-                                                <ul class="stars">
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                </ul>
-                                                {{-- <span>Reviews (72)</span> --}}
                                             </div>
                                         </div>
                                     </div>
@@ -104,4 +104,9 @@
         background-color: rgb(255, 255, 255);
         border-bottom: 0.4px solid #f33f3f;
     }
+
+    .hoverne:hover {
+        color: #f33f3f;
+    }
+
 </style>

@@ -2,6 +2,9 @@
 @section('title', 'Danh sách tài khoản')
 @section('content')
     <table class="table table-bordered">
+        <div class="alert alert-default-info">
+            <h3 class="text-center">Danh sách tài khoản</h3>
+        </div>
         @if(session()->has('success'))
             <div class="alert alert-success">
                 {{ session()->get('success') }}

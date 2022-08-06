@@ -164,4 +164,13 @@ class ProductController extends Controller
         $data->delete();
         return redirect()->route('page.product-detail', $data->product_id);
     }
+
+    function showIndex() {
+        $products = Product::select('products.*', 'category_products.name', 'sizes.nameSize')
+            ->join('category_products', 'products.category_id', '=', 'category_products.id')
+            ->join('sizes', 'products.size_id', '=', 'sizes.id')
+            ->where('statusPrd', '=', 0)->where('statusCate', '=', 0)->orderByDesc('id')->skip(0)->take(6)->get();
+            // dd($products);
+        return view('client.index', compact('products'));
+    }
 }

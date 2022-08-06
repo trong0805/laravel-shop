@@ -27,7 +27,7 @@
                 </div>
                 <div class="col-md-12 d-flex">
                     <div class="col-lg-7 col-md-7">
-                        <img width="100%" id="imgClick" class="border" src="{{ asset($dataProduct->avatar) }}"
+                        <img width="100%" id="imgClick" class="border mb-1  " src="{{ asset($dataProduct->avatar) }}"
                             alt="">
                         <div class="row-grid d-flex">
                             <div class="col-lg-3">
@@ -74,15 +74,15 @@
                                     <input type="button" onclick="cong()" value="+" class="btn btn-primary"> <br>
                                     <button type="submit" class="btn btn-danger mt-2">Thêm vào giỏ hàng</button>
                                 </form>
-                                <ul class="stars">
+                                {{-- <ul class="stars">
                                     <li><i class="fa fa-star"></i></li>
                                     <li><i class="fa fa-star"></i></li>
                                     <li><i class="fa fa-star"></i></li>
                                     <li><i class="fa fa-star"></i></li>
                                     <li><i class="fa fa-star"></i></li>
-                                </ul>
+                                </ul> --}}
                             </div>
-                            <div class="col-md-12">
+                            <div class="col-md-12 mb-2">
                                 <div class="left-content">
                                     <ul class="social-icons">
                                         <li><a href="#" style="padding: 16px;"><i class="fa fa-facebook"></i></a></li>
@@ -159,21 +159,22 @@
                                                 src="{{ asset($item->avatar) }}" alt=""></a>
                                         <div class="down-content">
                                             <a href="{{ route('page.product-detail', $item->id) }}" class="d-block">
-                                                <h5 class="text-capitalize nameCut">{{ $item->nameProduct }}</h5>
+                                                <h5 class="text-capitalize nameCut hoverne">{{ $item->nameProduct }}</h5>
                                             </a>
+                                            <p class="text-capitalize nameContent my-1">{{ $item->description }}</p>
                                             <p class="m-0">Giá : {{ number_format($item->price) }} <sup>đ</sup></p>
                                             <div class="d-flex justify-content-between">
                                                 <p class="my-0">Loại : {{ $item->name }}</p>
                                                 <p class="my-0">Kích cỡ : {{ $item->nameSize }}
                                             </div>
                                             </p>
-                                            <ul class="stars">
+                                            {{-- <ul class="stars">
                                                 <li><i class="fa fa-star"></i></li>
                                                 <li><i class="fa fa-star"></i></li>
                                                 <li><i class="fa fa-star"></i></li>
                                                 <li><i class="fa fa-star"></i></li>
                                                 <li><i class="fa fa-star"></i></li>
-                                            </ul>
+                                            </ul> --}}
 
                                             {{-- <span>Reviews (72)</span> --}}
                                         </div>
@@ -203,3 +204,8 @@
         }
     }
 </script>
+<style>
+    .hoverne:hover {
+        color: #f33f3f;
+    }
+</style>

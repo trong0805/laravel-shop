@@ -19,7 +19,7 @@
                 <th>Giá</th>
                 <th>Kích cỡ</th>
                 <th>Trạng thái</th>
-                <th>Mô tả</th>
+                {{-- <th>Mô tả</th> --}}
                 <th>Danh mục</th>
                 <th>Chức năng</th>
             </tr>
@@ -42,7 +42,7 @@
                             @endif
                         </form>
                     </a></td>
-                    <td>{{ $item->description }}</td>
+                    {{-- <td>{{ $item->description }}</td> --}}
                     <td>{{ $item->name }}</td>
                     <td style="display: flex;">
                         <a href="{{ route('admin.products.edit', $item->id) }}" class="btn btn-warning mx-2">Sửa</a>
