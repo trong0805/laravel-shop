@@ -65,8 +65,15 @@
                                     <div class="col-lg-4 col-md-4 all prd{{ $item->category_id }} size{{ $item->size_id }}">
                                         <div class="product-item">
                                             <a href="{{ route('page.product-detail', $item->id) }}"><img
-                                                    src="{{ asset($item->avatar) }}" alt="">
+                                                    src="{{ asset($item->avatar) }}" onmousemove="this.src='<?php
+                                                    $galleryImages = DB::table('gallery_images')
+                                                        ->where('gallery_images.product_id', '=', $item->id)->skip(0)->take(1)->get();
+                                                    foreach ($galleryImages as $ok) {
+                                                        echo asset($ok->image_gallery);
+                                                    }
+                                                    ?>'" onmouseout="this.src='{{ asset($item->avatar) }}'" alt="">
                                             </a>
+                                            
                                             <div class="hoverImg">
                                                 <div class="ok"></div>
                                             </div>
@@ -108,5 +115,4 @@
     .hoverne:hover {
         color: #f33f3f;
     }
-
 </style>

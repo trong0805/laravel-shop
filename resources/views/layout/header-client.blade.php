@@ -11,15 +11,15 @@
             <div class="collapse navbar-collapse m-auto" id="navbarResponsive">
                 <ul class="navbar-nav m-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('page.home') }}">Home
+                        <a class="nav-link" href="{{ route('page.home') }}">Trang chủ
                             <span class="sr-only">(current)</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('page.products') }}">Our Products</a>
+                        <a class="nav-link" href="{{ route('page.products') }}">Sản phẩm</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('page.contacts.contact') }}">Contact Us</a>
+                        <a class="nav-link" href="{{ route('page.contacts.contact') }}">Liên hệ</a>
                     </li>
 
                 </ul>
@@ -27,9 +27,9 @@
             <div class="">
                 <a class="navbar-brand float-right" onclick="show()" id="menuClicks">
                     <h2 class="position-relative"><i class="fas fa-list-ul"></i>
-                        <p class="position-absolute text-center font-weight-bold"
-                            style=" background: white; border: 1px solid grey; color: red; top: -8px; right: -12px; width: 24px; height: 24px; border-radius: 50%;">
-                            @if (Auth::user())
+                        @if (Auth::user())
+                            <p class="position-absolute text-center font-weight-bold"
+                                style=" background: white; border: 1px solid grey; color: red; top: -8px; right: -12px; width: 24px; height: 24px; border-radius: 50%;">
                                 <?php
                                 $carts = DB::table('carts')
                                     ->where('carts.userId', '=', Auth::user()->id)
@@ -37,11 +37,11 @@
                                 // dd(count($carts));
                                 echo count($carts);
                                 ?>
-                            @else
-                                0
-                            @endif
+                            </p>
+                        @else
+                            
+                        @endif
 
-                        </p>
                     </h2>
                 </a>
 
@@ -59,7 +59,8 @@
         @if (Auth::user())
             <li class="nav-item text-center">
                 <a class="nav-link">
-                    <img src="{{ asset(Auth::user()->avatar) }}" width="80px" style="border-radius:50%;">
+                    <img src="{{ asset(Auth::user()->avatar) }}"
+                        style="border-radius:50%; object-fit: cover; width:80px; height:80px;">
                 </a>
                 <h4>{{ Auth::user()->name }}</h4>
             </li>

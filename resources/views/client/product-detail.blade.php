@@ -64,7 +64,8 @@
                                     {{-- <a onclick="myFunction()" id="buttonShow" style="color: blue; cursor: pointer;">ẩn</a> --}}
                                 </p>
                                 <div class="m-auto text-center">
-                                    <a onclick="myFunction()" id="buttonShow" style="color: blue; cursor: pointer;">Hiển thị</a>
+                                    <a onclick="myFunctionShow()" id="buttonShow" style="color: blue; cursor: pointer;">Hiển thị</a>
+                                    <a onclick="myFunctionHide()" id="buttonHide" style="color: blue; cursor: pointer; display: none;">Ấn</a>
                                 </div>
                                 {{-- thêm vào giỏ --}}
                                 <form action="{{ route('page.carts.storeCart') }}" method="post">
@@ -79,13 +80,6 @@
                                     <input type="button" onclick="cong()" value="+" class="btn btn-primary"> <br>
                                     <button type="submit" class="btn btn-danger mt-2">Thêm vào giỏ hàng</button>
                                 </form>
-                                {{-- <ul class="stars">
-                                    <li><i class="fa fa-star"></i></li>
-                                    <li><i class="fa fa-star"></i></li>
-                                    <li><i class="fa fa-star"></i></li>
-                                    <li><i class="fa fa-star"></i></li>
-                                    <li><i class="fa fa-star"></i></li>
-                                </ul> --}}
                             </div>
                             <div class="col-md-12 mb-2">
                                 <div class="left-content">
@@ -203,10 +197,17 @@
         }
     }
 
-    function myFunction() {
+    function myFunctionShow() {
         var element = document.getElementById("myContent");
         element.classList.remove("nameContent");
         document.getElementById('buttonShow').style.display = 'none';
+        document.getElementById('buttonHide').style.display = 'block';
+    }
+    function myFunctionHide() {
+        var element = document.getElementById("myContent");
+        element.classList.add("nameContent");
+        document.getElementById('buttonShow').style.display = 'block';
+        document.getElementById('buttonHide').style.display = 'none';
     }
 </script>
 <style>

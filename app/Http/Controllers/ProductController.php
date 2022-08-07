@@ -123,7 +123,8 @@ class ProductController extends Controller
             ->join('category_products', 'products.category_id', '=', 'category_products.id')
             ->join('sizes', 'products.size_id', '=', 'sizes.id')
             ->where('statusPrd', '=', 0)->where('statusCate', '=', 0)->search()->get();
-        
+        $galleryImages = GalleryImage::select('image_gallery')->get();
+        // ->skip(0)->take(6)->get()
         // \dd($galleryImages);
         return view('client.products', compact('products', 'cate', 'sizes'));
     }

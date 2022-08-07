@@ -11,7 +11,10 @@
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
-                <img src="{{ asset(Auth::user()->avatar) }}" class="img-circle elevation-2" alt="User Image">
+                <img style="object-fit: cover;
+                width:40px;
+                height:40px;"
+                    src="{{ asset(Auth::user()->avatar) }}" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
                 <a href="#" class="d-block">{{ Auth::user()->name }}</a>
@@ -72,7 +75,7 @@
                     </ul>
                 </li>
                 {{-- bài viết --}}
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-pen-square"></i>
                         <p>
@@ -94,9 +97,9 @@
                             </a>
                         </li>
                     </ul>
-                </li>
+                </li> --}}
                 {{-- danh mục bài viết v --}}
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-pen"></i>
                         <p>
@@ -118,7 +121,7 @@
                             </a>
                         </li>
                     </ul>
-                </li>
+                </li> --}}
                 {{-- danh sach size v --}}
                 <li class="nav-item">
                     <a href="#" class="nav-link">

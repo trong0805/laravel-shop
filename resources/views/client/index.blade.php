@@ -116,3 +116,8 @@
         </div>
     </div>
 @endsection()
+<style>
+    .hoverne:hover {
+        color: #f33f3f;
+    }
+</style>
