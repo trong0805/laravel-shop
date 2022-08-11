@@ -23,7 +23,8 @@ TemplateMo 546 Sixteen Clothing
 https://templatemo.com/tm-546-sixteen-clothing
 
 -->
-
+<link rel="stylesheet" href="aos-by-red.css">
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <!-- Additional CSS Files -->
     <link rel="stylesheet" href="{{ asset('assets/css/fontawesome.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/templatemo-sixteen.css') }}">
@@ -74,7 +75,13 @@ https://templatemo.com/tm-546-sixteen-clothing
         }
     </script>
 
-
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+      AOS.init({
+        duration: 1100,
+        once: true,
+      });
+    </script>
 </body>
 
 </html>

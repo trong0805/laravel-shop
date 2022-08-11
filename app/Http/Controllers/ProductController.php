@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProductRequest;
+use App\Models\Cart;
 use App\Models\CategoryProduct;
 use App\Models\Comment;
 use App\Models\GalleryImage;
+use App\Models\OrderDetail;
 use App\Models\Product;
 use App\Models\Size;
 use Illuminate\Http\Request;
@@ -59,7 +61,7 @@ class ProductController extends Controller
                 foreach ($files as $ok) {
                     $images->image_gallery = 'images/GalleryProducts/' . $ok;
                 }
-                
+
                 $images->product_id = $nextId;
                 $images->save();
             }
@@ -110,6 +112,26 @@ class ProductController extends Controller
     public function delete($product)
     {
         $data = Product::find($product);
+
+        $carts = Cart::where('productId', '=', $product)->get();
+        foreach ($carts as $it) {
+            $it->delete();
+        }
+
+        $orderDts = OrderDetail::where('product_id', '=', $product)->get();
+        foreach ($orderDts as $it) {
+            $order = OrderDetail::find($it->id);
+            $order->product_id = 0;
+            $order->save();
+        }
+        $comments = Comment::where('product_id', '=', $product)->get();
+        foreach ($comments as $it) {
+            // $comment = Comment::find($it->id);
+            // $comment->product_id = 0;
+            // $comment->save();
+            $it->delete();
+        }
+
         $data->delete();
         return redirect()->route('admin.products.list');
     }
@@ -122,10 +144,9 @@ class ProductController extends Controller
         $products = Product::select('products.*', 'category_products.name', 'sizes.nameSize')
             ->join('category_products', 'products.category_id', '=', 'category_products.id')
             ->join('sizes', 'products.size_id', '=', 'sizes.id')
-            ->where('statusPrd', '=', 0)->where('statusCate', '=', 0)->search()->get();
+            ->where('statusPrd', '=', 0)->where('statusCate', '=', 0)->search()->Paginate(9);
         $galleryImages = GalleryImage::select('image_gallery')->get();
-        // ->skip(0)->take(6)->get()
-        // \dd($galleryImages);
+
         return view('client.products', compact('products', 'cate', 'sizes'));
     }
     public function updateStatus($product)
@@ -156,7 +177,7 @@ class ProductController extends Controller
         $productCate = DB::table('products')
             ->join('category_products', 'products.category_id', '=', 'category_products.id')
             ->join('sizes', 'products.size_id', '=', 'sizes.id')->where('statusPrd', '=', 0)->where('products.category_id', '=', $dataProduct->category_id)
-            ->select('products.*', 'category_products.name', 'sizes.nameSize')->get();
+            ->select('products.*', 'category_products.name', 'sizes.nameSize')->skip(0)->take(3)->get();
         // dd($productCate);
         $cate = CategoryProduct::all();
         $sizes = Size::all();
@@ -169,12 +190,41 @@ class ProductController extends Controller
         return redirect()->route('page.product-detail', $data->product_id);
     }
 
-    function showIndex() {
+    function showIndex()
+    {
         $products = Product::select('products.*', 'category_products.name', 'sizes.nameSize')
             ->join('category_products', 'products.category_id', '=', 'category_products.id')
             ->join('sizes', 'products.size_id', '=', 'sizes.id')
             ->where('statusPrd', '=', 0)->where('statusCate', '=', 0)->orderByDesc('id')->skip(0)->take(6)->get();
-            // dd($products);
+        // dd($products);
         return view('client.index', compact('products'));
+    }
+
+    // test welcome
+    public function welcome()
+    {
+        $cate = CategoryProduct::all();
+        $sizes = Size::all();
+        // $products = DB::table('products')->join('category_products', 'products.category_id', '=', 'category_products.id')
+        // ->select('products.*', 'category_products.name')->Paginate(9);
+        $products = Product::select('products.*', 'category_products.name', 'sizes.nameSize')
+            ->join('category_products', 'products.category_id', '=', 'category_products.id')
+            ->join('sizes', 'products.size_id', '=', 'sizes.id')
+            ->where('statusPrd', '=', 0)->where('statusCate', '=', 0)->search()->Paginate(9);
+        $galleryImages = GalleryImage::select('image_gallery')->get();
+
+        return view('welcome', compact('products', 'cate', 'sizes'));
+    }
+    public function filter($id)
+    {
+        $cate = CategoryProduct::all();
+        $sizes = Size::all();
+        $products = Product::select('products.*', 'category_products.name', 'sizes.nameSize')
+            ->join('category_products', 'products.category_id', '=', 'category_products.id')
+            ->join('sizes', 'products.size_id', '=', 'sizes.id')
+            ->where('statusPrd', '=', 0)->where('statusCate', '=', 0)->where('category_id', '=', $id)->search()->Paginate(9);
+        $galleryImages = GalleryImage::select('image_gallery')->get();
+
+        return view('welcome', compact('products', 'cate', 'sizes'));
     }
 }

@@ -19,7 +19,7 @@
                 <th>Email</th>
                 <th>Trạng thái</th>
                 <th>Quyền</th>
-                <th>action</th>
+                {{-- <th>action</th> --}}
             </tr>
         </thead>
         <tbody>
@@ -27,7 +27,7 @@
                 <tr>
                     <td>{{ $item->id }}</td>
                     <td>{{ $item->name }}</td>
-                    <td><img src="{{ $item->avatar }}" width="60px" alt=""></td>
+                    <td><img src="{{ asset($item->avatar) }}" width="60px" alt=""></td>
                     <td>{{ $item->username }}</td>
                     <td>{{ $item->email }}</td>
                     <td>
@@ -45,7 +45,7 @@
 
                     </td>
                     <td>{{ $item->role === 1 ? 'Khách hàng' : 'Admin' }}</td>
-                    <td>
+                    {{-- <td>
                         @if ($item->role === 0)
                         @else
                             <a onclick="return confirm('Bạn có chắc chắn muốn xóa')">
@@ -57,7 +57,7 @@
                             </a>
                         @endif
 
-                    </td>
+                    </td> --}}
                 </tr>
             @endforeach
         </tbody>

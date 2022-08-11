@@ -15,7 +15,7 @@
     </div>
 
 
-    <div class="products">
+    <div class="products"  data-aos="fade-up">
         <div class="container" style="max-width:100%;">
             <div class="row">
                 <div class="col-md-12">
@@ -29,7 +29,7 @@
                 </div>
                 <div class="col-md-10 m-auto">
                     <div class="filters-content d-flex">
-                        <div class="col-md-3 col-lg-3  p-0 text-white">
+                        <div class="col-md-3 col-lg-3  p-0 text-white"  data-aos="fade-right">
                             <div class="filters">
                                 <form action="" class="form-group d-flex">
                                     <input type="text" class="form-control mr-1" name="search"
@@ -59,7 +59,7 @@
 
                             </div>
                         </div>
-                        <div class="col-md-9 col-lg-9">
+                        <div class="col-md-9 col-lg-9"  data-aos="fade-left">
                             <div class="row grid">
                                 @foreach ($products as $item)
                                     <div class="col-lg-4 col-md-4 all prd{{ $item->category_id }} size{{ $item->size_id }}">
@@ -98,7 +98,7 @@
                 </div>
                 <div class="col-md-12">
                     <div class="d-flex justify-content-center">
-                        {{-- <div>{{ $products->links() }}</div> --}}
+                        <div>{{ $products->links() }}</div>
                     </div>
                 </div>
             </div>

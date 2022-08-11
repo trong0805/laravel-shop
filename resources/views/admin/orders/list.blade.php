@@ -7,7 +7,7 @@
         </div>
         <thead>
             <tr>
-                <th>Mã id</th>
+                <th>Tài khoản đặt</th>
                 <th>Tên</th>
                 <th>Email</th>
                 <th>Địa chỉ</th>
@@ -21,7 +21,7 @@
         <tbody>
             @foreach ($orders as $item)
                 <tr>
-                    <td>{{ $item->id }}</td>
+                    <td>{{ $item->name }}</td>
                     <td>{{ $item->orderName }}</td>
                     <td>{{ $item->orderEmail }}</td>
                     <td>{{ $item->address }}</td>
@@ -29,7 +29,7 @@
                     <td>{{ $item->orderCoupon == null ? 'Null' : $item->orderCoupon }}</td>
                     <td>{{ $item->orderDate }}</td>
                     <td>{{ number_format($item->orderTotal) }}<sup>đ</sup></td>
-                    <td>
+                    <td style="width: 200px;">
                         @if ($item->orderStatus == 0 || $item->orderStatus == 1)
                             <form action="{{ route('admin.orders.updateStatus', $item->id) }}" method="post">
                                 @csrf
@@ -53,13 +53,13 @@
                         @endif
 
                     </td>
-                    <td><a href="{{ route('admin.orders.detail', $item->id) }}" class="btn btn-success">Chi tiết <i
+                    <td style="width: 105px;"><a href="{{ route('admin.orders.detail', $item->id) }}" class="btn btn-success">Xem <i
                                 class="fas fa-eye"></i></a></td>
                 </tr>
             @endforeach
         </tbody>
     </table>
     <div>
-        {{-- {{ $products->links() }} --}}
+        {{ $orders->links() }}
     </div>
 @endsection

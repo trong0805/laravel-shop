@@ -9,22 +9,20 @@ use Illuminate\Http\Request;
 class OrderDetailController extends Controller
 {
     public function index($order) {
-        $orders = OrderDetail::select('order_details.*', 'products.nameProduct', 'products.avatar')
-        ->join('products', 'order_details.product_id', '=', 'products.id')
-        // ->join('orders', 'order_details.order_id', '=', 'orders.id')
-        ->where('order_id' , '=', $order)->paginate(5);
-        // $orders = OrderDetail::all();
+        $orders = OrderDetail::where('order_id' , '=', $order)->paginate(5);
+        // select('order_details.*', 'products.nameProduct', 'products.avatar')
+        // ->join('products', 'order_details.product_id', '=', 'products.id')
+        
         // \dd($orders);
         $total = 0;
         $tt = Order::find($order);
         return view('admin.orders.detail', compact('orders','total', 'tt'));
     }
     public function billDetail($order) {
-        $orders = OrderDetail::select('order_details.*', 'products.nameProduct', 'products.avatar')
-        ->join('products', 'order_details.product_id', '=', 'products.id')
-        // ->join('orders', 'order_details.order_id', '=', 'orders.id')
-        ->where('order_id' , '=', $order)->paginate(5);
-        // $orders = OrderDetail::all();
+        $orders = OrderDetail::where('order_id' , '=', $order)->paginate(5);
+        // select('order_details.*', 'products.nameProduct', 'products.avatar')
+        // ->join('products', 'order_details.product_id', '=', 'products.id')
+        // ->
         // \dd($orders);
         $total = 0;
         $tt = Order::find($order);

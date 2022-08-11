@@ -26,7 +26,7 @@ class OrderRequest extends FormRequest
         return [
             'orderName'=> 'required',
             'orderEmail'=> 'required|email',
-            'numberPhone'=> 'required|integer',
+            'numberPhone'=> 'required|numeric',
             'address'=> 'required'
         ];
     }
@@ -37,7 +37,7 @@ class OrderRequest extends FormRequest
             'orderEmail.required' => 'Email không được để trống!',
             'orderEmail.email' => 'Email phải đúng định dạng!',
             'numberPhone.required' => 'Số điện thoại không được để trống!',
-            'numberPhone.integer' => 'Số điện thoại phải là số!',
+            'numberPhone.numeric' => 'Số điện thoại phải là số!',
             'address.required' => 'Địa chỉ không được để trống!',
         ];
     }

@@ -25,7 +25,7 @@
     </div>
     <!-- Banner Ends Here -->
 
-    <div class="latest-products">
+    <div class="latest-products" data-aos="fade-up">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
@@ -35,11 +35,17 @@
                     </div>
                 </div>
                 @foreach ($products as $item)
-                    <div class="col-lg-4 col-md-4 all prd{{ $item->category_id }} size{{ $item->size_id }}">
+                    <div class="col-lg-4 col-md-4 all prd{{ $item->category_id }} size{{ $item->size_id }}"  data-aos="fade-left">
                         <div class="product-item">
-                            <a href="{{ route('page.product-detail', $item->id) }}"><img src="{{ asset($item->avatar) }}"
-                                    alt="">
-                            </a>
+                            <a href="{{ route('page.product-detail', $item->id) }}"><img
+                                src="{{ asset($item->avatar) }}" onmousemove="this.src='<?php
+                                $galleryImages = DB::table('gallery_images')
+                                    ->where('gallery_images.product_id', '=', $item->id)->skip(0)->take(1)->get();
+                                foreach ($galleryImages as $ok) {
+                                    echo asset($ok->image_gallery);
+                                }
+                                ?>'" onmouseout="this.src='{{ asset($item->avatar) }}'" alt="">
+                        </a>
                             <div class="hoverImg">
                                 <div class="ok"></div>
                             </div>
@@ -61,7 +67,7 @@
         </div>
     </div>
 
-    <div class="best-features">
+    <div class="best-features"  data-aos="fade-up">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
@@ -96,7 +102,7 @@
     </div>
 
 
-    <div class="call-to-action">
+    <div class="call-to-action"  data-aos="fade-up">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">

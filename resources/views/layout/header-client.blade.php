@@ -38,10 +38,7 @@
                                 echo count($carts);
                                 ?>
                             </p>
-                        @else
-                            
                         @endif
-
                     </h2>
                 </a>
 
@@ -109,8 +106,16 @@
         background-color: white;
         display: none;
         background: linear-gradient(135deg, rgb(249, 162, 162), rgb(167, 167, 255));
+        animation: animations linear 0.3s;
     }
-
+    @keyframes animations {
+        0% {
+            right: -300px;
+        }
+        100% {
+            right: 0px;
+        }
+    }
     .overlay {
         position: fixed;
         top: 0;
@@ -153,6 +158,7 @@
         border-radius: 50%;
         width: 24px
     }
+   
 </style>
 <script>
     function show() {

@@ -24,6 +24,7 @@
         </div>
         <div class="w-100">
             <h3 class="text-center">Hóa đơn mua hàng</h3>
+            <h6 class="text-center">{{ $tt->orderDate }}</h6>
             <div class="p-3 col-lg-10 m-auto">
                 <div class="d-flex">
                     <div class="col-lg-6"><b>Tên khách hàng: </b>{{ $tt->orderName }}</div>
@@ -39,7 +40,6 @@
             <table class="table table-bordered">
                 <thead>
                     <tr>
-                        <th>Mã id</th>
                         <th>Tên sản phẩm</th>
                         {{-- <th>Ảnh</th> --}}
                         <th>Giá</th>
@@ -50,8 +50,7 @@
                 <tbody>
                     @foreach ($orders as $item)
                         <tr>
-                            <td>{{ $item->id }}</td>
-                            <td>{{ $item->nameProduct }}</td>
+                            <td>{{ $item->oddNamePrd }}</td>
                             {{-- <td><img src="{{ asset($item->avatar )}}" width="100px" alt=""></td> --}}
                             <td>{{ number_format($item->oddPricePrd) }}<sup>đ</sup></td>
                             <td>{{ $item->oddQuantityPrd }}</td>
@@ -60,8 +59,12 @@
                         </tr>
                     @endforeach
                     <tr>
-                        <td colspan="4">Tổng tiền:</td>
-                        <td colspan="1">{{ number_format($total) }}<sup>đ</sup></td>
+                        <td colspan="3">Tiền giao hàng:</td>
+                        <td colspan="1">{{ number_format(800000) }}<sup>đ</sup></td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">Tổng tiền:</td>
+                        <td colspan="1">{{ number_format($total+800000) }}<sup>đ</sup></td>
                     </tr>
                 </tbody>
             </table>

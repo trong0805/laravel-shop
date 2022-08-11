@@ -15,7 +15,7 @@
     </div>
 
 
-    <div class="products">
+    <div class="products"  data-aos="fade-up">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
@@ -26,7 +26,7 @@
                     </div>
                 </div>
                 <div class="col-md-12 d-flex">
-                    <div class="col-lg-7 col-md-7">
+                    <div class="col-lg-7 col-md-7"  data-aos="fade-right">
                         <img width="100%" id="imgClick" class="border mb-1  " src="{{ asset($dataProduct->avatar) }}"
                             alt="">
                         <div class="row-grid d-flex">
@@ -42,7 +42,7 @@
                             @endforeach
                         </div>
                     </div>
-                    <div class="col-lg-5 col-md-5">
+                    <div class="col-lg-5 col-md-5"  data-aos="fade-down">
                         <div class="product-item">
                             <div class="down-content">
                                 {{-- <h3> --}}
@@ -95,7 +95,7 @@
                     </div>
                 </div>
                 {{-- bình luận --}}
-                <div class="col-md-12">
+                <div class="col-md-12"  data-aos="fade-up">
                     <div class="section-heading">
                         <h2>Bình luận</h2>
                         {{-- {{ Auth::user()->id }} --}}
@@ -104,7 +104,7 @@
                         <div class="product-item px-3 py-3 my-1 d-flex justify-content-between">
                             <div class="d-flex">
                                 <div class="avatar mr-2">
-                                    <img src="{{ $item->avatar }}" style="width: 60px;" class="rounded-circle"
+                                    <img src="{{ asset($item->avatar) }}" style="width: 60px; height: 60px; object-fit: cover;" class="rounded-circle"
                                         alt="">
                                 </div>
                                 <div class="d-flex flex-column justify-content-center">
@@ -136,10 +136,13 @@
                         <form action="{{ route('page.store') }}" method="POST">
                             @csrf
                             <div class="form-group d-flex">
+                                <div>
+                                    <img src="{{ asset(Auth::user()->avatar) }}" style="width: 60px; height: auto;" class="mr-2" alt="" srcset="">
+                                </div>
                                 <input type="hidden" value="{{ $dataProduct->id }}" name="product_id"
                                     class="form-control mr-2" placeholder="id sản phẩm">
-                                <input type="text" name="content" class="form-control mr-2"
-                                    placeholder="Viết bình luận">
+                                <textarea type="text" name="content" class="form-control mr-2"
+                                    placeholder="Viết bình luận"></textarea>
                                 <button type="submit" class="btn btn-primary">Bình luận</button>
                             </div>
                         </form>
@@ -148,7 +151,7 @@
                     @endif
                 </div>
                 {{-- //sản phẩm liên quan --}}
-                <div class="col-md-12">
+                <div class="col-md-12"  data-aos="fade-left">
                     <div class="filters-content">
                         <div class="row grid">
                             @foreach ($productCate as $item)

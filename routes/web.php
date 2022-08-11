@@ -17,16 +17,11 @@ use App\Models\OrderDetail;
 use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+// test
+Route::get('/', [ProductController::class, 'welcome'])->name('welcome');
+Route::get('/filter/{id}', [ProductController::class, 'filter'])->name('filter');
 
-Route::get('/', function () {
-    return view('welcome');
-});
-// Route::get('/header', function () {
-//     $carts = DB::table('carts')->join('products', 'carts.productId', '=', 'products.id')->where('carts.userId', '=', Auth::user()->id)
-//         ->select('carts.*', 'products.nameProduct', 'products.avatar', 'products.category_id')->get();
-//     // dd(count($carts));
-//     return view('layout.header-client', compact('carts'));
-// });
+
 Route::middleware('guest')->prefix('auth')->name('auth.')->group(function () {
     Route::get('/login', [AuthController::class, 'login'])->name('login');
     Route::post('/postLogin', [AuthController::class, 'postLogin'])->name('postLogin');

@@ -22,7 +22,7 @@ class CartController extends Controller
     public function storeCart(Request $request)
     {
         if(Auth::user() == null){
-            session()->flash('error', 'VÙi lòng đăng nhập để đặt hàng');
+            session()->flash('error', 'Vui lòng đăng nhập để đặt hàng');
             return redirect()->route('auth.login');
         }
         $cart = new Cart();
