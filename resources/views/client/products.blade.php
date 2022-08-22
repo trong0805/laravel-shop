@@ -39,10 +39,11 @@
                                 <h4 class="mb-2 text-left"
                                     style="color: black; border-bottom: 2px solid grey; font-weight: bold;">Danh mục</h4>
                                 <ul>
-                                    <li class="active p-1 m-0 d-block text-left" data-filter="*">Tất cả sản phẩm</li>
+                                    {{-- <li class="active p-1 m-0 d-block text-left" data-filter="*">Tất cả sản phẩm</li> --}}
+                                    <li class="active p-1 m-0 d-block text-left" data-filter="*"><a style="color: black;" href="{{ route('page.products') }}">Tất cả sản phẩm</a></li>
                                     @foreach ($cate as $data)
-                                        <li class="d-block p-1 m-0 text-left " data-filter=".prd{{ $data->id }}">
-                                            {{ $data->name }}</li>
+                                        <li class="d-block p-1 m-0 text-left">
+                                            <a style="color: black;" href="{{ route('filter', $data->id) }}">{{ $data->name }}</li></a>
                                     @endforeach
 
                                 </ul>
@@ -103,7 +104,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>  
 @endsection()
 <style>
     .filters>ul li:hover {

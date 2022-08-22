@@ -185,10 +185,10 @@
                                     </strong><strong>{{ number_format($total) }}<sup>đ</sup></strong></li>
                                 <li class="d-flex justify-content-between py-3 border-bottom"><strong
                                         class="text-muted">Vận chuyển và xử
-                                        lý</strong><strong>{{ number_format(800000) }}<sup>đ</sup></strong></li>
+                                        lý</strong><strong>{{ $total != 0 ? number_format(800000) : '0' }}<sup>đ</sup></strong></li>
                                 <li class="d-flex justify-content-between py-3 border-bottom"><strong
                                         class="text-muted">Tổng tiền</strong>
-                                    <h5 class="font-weight-bold">{{ number_format($total + 800000) }}<sup>đ</sup></h5>
+                                    <h5 class="font-weight-bold">{{ $total != 0 ? number_format($total + 800000) : '0'}}<sup>đ</sup></h5>
                                 </li>
 
                             </ul>

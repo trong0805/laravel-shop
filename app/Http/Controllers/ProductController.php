@@ -225,6 +225,6 @@ class ProductController extends Controller
             ->where('statusPrd', '=', 0)->where('statusCate', '=', 0)->where('category_id', '=', $id)->search()->Paginate(9);
         $galleryImages = GalleryImage::select('image_gallery')->get();
 
-        return view('welcome', compact('products', 'cate', 'sizes'));
+        return view('client.products', compact('products', 'cate', 'sizes'));
     }
 }

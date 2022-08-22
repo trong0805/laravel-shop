@@ -41,8 +41,8 @@
                                 <ul>
                                     <li class="active p-1 m-0 d-block text-left" data-filter="*">Tất cả sản phẩm</li>
                                     @foreach ($cate as $data)
-                                        <li class="d-block p-1 m-0 text-left">
-                                            <a href="{{ route('filter', $data->id) }}">{{ $data->name }}</li></a>
+                                        <li class="d-block p-1 m-0 text-left " data-filter=".prd{{ $data->id }}">
+                                            {{ $data->name }}</li>
                                     @endforeach
 
                                 </ul>

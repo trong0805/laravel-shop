@@ -109,6 +109,7 @@
                                 </div>
                                 <div class="d-flex flex-column justify-content-center">
                                     <h5>{{ $item->name }}</h5>
+                                    
                                     <p class="text-black-50">{{ $item->dateComment }}</p>
                                 </div>
                                 <div class="content ml-5 my-auto">
