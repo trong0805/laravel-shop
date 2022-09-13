@@ -116,7 +116,7 @@
                                     <p class="text-black-50 font-weight-bold">{{ $item->content }}</p>
                                 </div>
                             </div>
-                            @if (Auth::user() && $item->user_id === Auth::user()->id)
+                            @if (Auth::user() && $item->user_id === Auth::user()->id || Auth::user()->role == 0)
                                 <form action="{{ route('page.deleteComment', $item->id) }}" method="post">
                                     @method('DELETE')
                                     @csrf

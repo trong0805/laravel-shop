@@ -15,8 +15,8 @@ class OrderController extends Controller
 {
     public function storeOrder(OrderRequest $request)
     {
-        $statement = DB::select("SHOW TABLE STATUS LIKE 'orders'");
-        $nextId = $statement[0]->Auto_increment;
+        // $statement = DB::select("SHOW TABLE STATUS LIKE 'orders'");
+        // $nextId = $statement[0]->Auto_increment;
         // \dd($nextId);
         $order = new Order();
         $order->orderDate = date('Y-m-d');
@@ -33,7 +33,7 @@ class OrderController extends Controller
         foreach ($carts as $it) {
             $prd = Product::find($it->productId);
             $orderDetail = new OrderDetail();
-            $orderDetail->order_id = $nextId;
+            $orderDetail->order_id = $order->id;
             $orderDetail->product_id = $it->productId;
             $orderDetail->oddNamePrd = $prd->nameProduct;
             $orderDetail->oddPricePrd = $it->price;

@@ -18,7 +18,7 @@ use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 // test
-Route::get('/', [ProductController::class, 'welcome'])->name('welcome');
+Route::get('/', [ProductController::class, 'showIndex'])->name('welcome');
 Route::get('/filter/{id}', [ProductController::class, 'filter'])->name('filter');
 
 
